@@ -1,0 +1,46 @@
+---
+title: "Emergency Fund Calculator"
+description: "Free emergency fund calculator: find how many months of expenses you need based on job stability and dependants, and how long it will take to save."
+tool: true
+section: Tools
+section_url: tools.html
+crumb: "Emergency fund calculator"
+faq:
+  - q: "Should my emergency fund be invested?"
+    a: "No. Keep it in cash you can reach within a day or two — a high-yield savings account is ideal. The goal is safety, not growth."
+  - q: "Can I use a credit card instead?"
+    a: "A card is a backup, not a fund. Borrowing at high interest during a crisis makes recovery harder."
+  - q: "Should couples have one fund or two?"
+    a: "Either works. What matters is that the total covers the household's essential costs for the target number of months."
+---
+<section class="tool-hero wrap"><p class="eyebrow pill pill-money">Money tool · free · private</p><h1>Emergency fund calculator</h1><p class="lede">Find the right-sized safety net for your situation, see how covered you are today, and how long it will take to finish.</p></section>
+<section class="wrap" data-tool="emergency-fund">
+  <div class="tool-grid">
+    <div class="panel"><h2>Your numbers</h2><div class="field"><label for="cur">Currency</label><select id="cur" data-currency><option value="USD">US dollar ($)</option><option value="CAD">Canadian dollar (CA$)</option><option value="EUR">Euro (€)</option><option value="GBP">British pound (£)</option><option value="INR">Indian rupee (₹)</option><option value="AUD">Australian dollar (A$)</option><option value="AED">UAE dirham</option><option value="SGD">Singapore dollar</option><option value="LKR">Sri Lankan rupee</option></select></div><div class="field"><label for="efExp">Essential monthly costs</label><input id="efExp" type="number" inputmode="decimal" step="50" value="3200"><small>Rent or mortgage, food, utilities, insurance, transport, minimum debt payments.</small></div><div class="field"><label for="efJob">How stable is your income?</label><select id="efJob"><option value="0">Very stable (tenured, government, in-demand skill)</option><option value="1" selected>Average</option><option value="3">Variable (commission, freelance, seasonal, business owner)</option></select></div><div class="field"><label for="efDeps">People who depend on your income</label><select id="efDeps"><option value="0" selected>None</option><option value="1">One or two</option><option value="2">Three or more</option></select></div><div class="field"><label for="efEarners">Earners in the household</label><select id="efEarners"><option value="1" selected>Just me</option><option value="0">Two or more</option></select></div><div class="two"><div class="field"><label for="efHave">Saved for emergencies now</label><input id="efHave" type="number" inputmode="decimal" step="100" value="4000"></div><div class="field"><label for="efSave">You can save per month</label><input id="efSave" type="number" inputmode="decimal" step="10" value="400"></div></div><p class="fine">Everything is calculated in your browser. Nothing you type is sent to us unless you choose to email yourself the results.</p></div>
+    <div class="panel" aria-live="polite"><div id="result"></div>
+      <div class="ad-slot" data-slot="tool-result"></div>
+      <form class="news-inline" data-form="results" data-subject="Tool results request (Emergency Fund Calculator)" data-inline="Done! We will email your results and one tip to improve them.">
+        <p class="flabel" style="margin-top:14px">Email me these results + one tip to improve them</p>
+        <div class="two"><input type="email" name="email" required placeholder="you@example.com" aria-label="Email" autocomplete="email"><button class="btn btn-ink" type="submit">Send</button></div>
+        <input type="hidden" name="tool" value="Emergency Fund Calculator"><input type="hidden" name="summary" value="">
+        <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+      </form>
+    </div>
+  </div>
+</section>
+<section class="wrap" style="margin-top:20px"><aside class="lead-cta"><div><p class="eyebrow">Free · no obligation</p><h3>Want a full safety-net check (savings + insurance)?</h3><p>Get a personalised Life Upgrade Plan and, if you want, an intro to one vetted professional within 48 hours. No spam, no pressure.</p></div><a class="btn btn-sun" href="plan.html?focus=Money&src=tool-emergency-fund">Get my free plan</a></aside></section>
+<section class="wrap article-grid" style="margin-top:10px">
+  <div class="prose"><h2>How big should an emergency fund be?</h2>
+<p>The common guideline is <strong>three to six months of essential expenses</strong>. This calculator adjusts that range for your risk: variable income, dependants and being the only earner all push the target up, to a maximum of twelve months.</p>
+<h2>Start small, then build</h2>
+<ol><li><strong>Starter fund:</strong> one month of essentials, or a fixed amount you can reach quickly, to stop small surprises from becoming debt.</li><li><strong>Pay down high-interest debt</strong> while keeping the starter fund.</li><li><strong>Full fund:</strong> build to your target before investing heavily outside retirement accounts.</li></ol>
+<h2>What counts as an emergency?</h2>
+<p>Job loss, urgent medical or dental costs, essential car or home repairs, and emergency travel. Not holidays, sales or planned purchases — give those their own savings goals so the safety net stays intact.</p>
+    <div class="ad-slot" data-slot="in-content"></div>
+    <p>Go deeper: <a href="guides/emergency-fund.html">read the full guide</a>.</p>
+    <h2 id="faq">Frequently asked questions</h2><div class="faq"><details><summary>Should my emergency fund be invested?</summary><p>No. Keep it in cash you can reach within a day or two — a high-yield savings account is ideal. The goal is safety, not growth.</p></details><details><summary>Can I use a credit card instead?</summary><p>A card is a backup, not a fund. Borrowing at high interest during a crisis makes recovery harder.</p></details><details><summary>Should couples have one fund or two?</summary><p>Either works. What matters is that the total covers the household&#x27;s essential costs for the target number of months.</p></details></div>
+    <p class="fine">For education only. Results are estimates based on the numbers you enter and simplified assumptions; they are not financial, medical or legal advice.</p>
+  </div>
+  <aside class="side"><div class="side-card"><p class="eyebrow">How balanced is your life?</p><p>Take the 2-minute Life Score quiz.</p><a class="btn btn-sun btn-sm" href="life-score.html">Get my score</a></div><div class="ad-slot" data-slot="sidebar"></div></aside>
+</section>
+<section class="wrap section" style="padding-top:20px"><h2>Related tools</h2><div class="grid g3"><a class="card" href="budget.html"><h3>50/30/20 Budget Calculator</h3><p>Open the free tool →</p></a><a class="card" href="debt-payoff.html"><h3>Debt Payoff Planner</h3><p>Open the free tool →</p></a><a class="card" href="life-insurance.html"><h3>Life Insurance Needs Calculator</h3><p>Open the free tool →</p></a></div></section>
