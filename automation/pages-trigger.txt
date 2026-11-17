@@ -1,0 +1,1 @@
+This branch only exists to switch GitHub Pages on. Once Settings > Pages is set to main / (root), it can be deleted.
