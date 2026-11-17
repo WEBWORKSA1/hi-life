@@ -1,0 +1,27 @@
+---
+title: "Embed Free Hi.Life Calculators on Your Website"
+description: "Add free, mobile-friendly Hi.Life calculators to your blog, bank, credit union, clinic or business website with one line of code. Custom-branded versions available."
+---
+<section class="page-head wrap"><p class="eyebrow">For websites, banks, employers &amp; creators</p><h1>Embed our calculators — free</h1><p class="lede">Give your visitors a fast, private, mobile-friendly calculator with one line of code. No account needed. Need your colours, logo and lead capture? Ask for a custom version.</p></section>
+<section class="wrap lead-shell section" style="padding-top:20px">
+  <div>
+    <div class="field"><label for="emTool">Pick a tool</label><select id="emTool"><option value="retirement">Retirement & FIRE</option><option value="compound-interest">Compound Interest</option><option value="debt-payoff">Debt Payoff</option><option value="budget">50/30/20 Budget</option><option value="home-affordability">Home Affordability</option><option value="life-insurance">Life Insurance Needs</option><option value="on-track">Am I On Track?</option><option value="money-last">How Long Will My Money Last?</option><option value="calories">Calories & BMI</option><option value="sleep">Sleep Cycle</option></select></div>
+    <div class="field"><label for="emCode">Copy this code</label><textarea id="emCode" readonly style="min-height:110px;font-family:monospace;font-size:.85rem"></textarea></div>
+    <p><button type="button" class="btn btn-ink btn-sm" id="emCopy">Copy code</button> <a class="btn btn-ghost btn-sm" id="emPreview" target="_blank" rel="noopener">Preview</a></p>
+    <ul class="check-list"><li>Free for personal, educational and business sites.</li><li>Calculations run in the visitor's browser — no data collected.</li><li>Keep the small "Free tool by Hi.Life" credit link.</li></ul>
+  </div>
+  <form class="lead-form" data-form="embed" data-subject="Custom embed request" data-score>
+    <h2 style="font-size:1.4rem">Want a branded version?</h2><p class="muted">Your colours and logo, your lead form in the results, and priority support.</p>
+    <div class="two"><div class="field"><label for="ebName">Name</label><input id="ebName" type="text" name="name" required></div><div class="field"><label for="ebCo">Organisation</label><input id="ebCo" type="text" name="company" required></div></div>
+    <div class="field"><label for="ebEmail">Work email</label><input id="ebEmail" type="email" name="email" required></div>
+    <div class="field"><label for="ebSite">Website</label><input id="ebSite" type="url" name="website" placeholder="https://"></div>
+    <div class="field"><label for="ebType">Organisation type</label><select id="ebType" name="org_type"><option data-score="40">Bank / credit union / lender</option><option data-score="40">Financial adviser / insurance firm</option><option data-score="30">Employer / HR benefits</option><option data-score="20">Health or wellness business</option><option data-score="10">Blog / creator</option></select></div>
+    <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <button class="btn btn-sun" type="submit">Request a branded version</button>
+  </form>
+</section>
+<script>
+(function(){var s=document.getElementById('emTool'),c=document.getElementById('emCode'),p=document.getElementById('emPreview');
+function u(){var base=new URL(s.value+'.html',document.baseURI).href;var src=base+'?embed=1';c.value='<iframe src="'+src+'" title="Free calculator by Hi.Life" width="100%" height="900" style="border:0;border-radius:12px;max-width:820px" loading="lazy"></iframe>';p.href=new URL(s.value+'.html?embed=1',document.baseURI).href;}
+s.addEventListener('change',u);document.getElementById('emCopy').addEventListener('click',function(){c.select();navigator.clipboard&&navigator.clipboard.writeText(c.value);this.textContent='Copied ✓';});u();})();
+</script>

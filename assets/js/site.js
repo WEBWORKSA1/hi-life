@@ -34,6 +34,49 @@
     }
   };
 
+  /* Upgrade Points: small rewards for using tools, logging weeks and finishing quizzes (kept in this browser) */
+  var LEVELS = [[0, 'Starter'], [50, 'Explorer'], [150, 'Builder'], [300, 'Achiever'], [600, 'High Lifer']];
+  function level(p) { var l = LEVELS[0]; LEVELS.forEach(function (x) { if (p >= x[0]) l = x; }); return l[1]; }
+  function renderPoints() {
+    var p = store.get('pts', 0);
+    $$('[data-points]').forEach(function (el) { el.innerHTML = '⭐ <strong>' + p + '</strong> Upgrade Points · ' + level(p); el.hidden = !p; });
+  }
+  window.HL.points = function (key, n) {
+    var today = new Date().toDateString(), log = store.get('pts_log', {});
+    if (log[key] === today) return;
+    log[key] = today; store.set('pts_log', log);
+    var before = store.get('pts', 0), after = before + n;
+    store.set('pts', after);
+    if (level(after) !== level(before)) toast('Level up: ' + level(after) + ' ⭐');
+    renderPoints();
+  };
+  renderPoints();
+
+  /* Embed mode for partner sites: tool.html?embed=1 */
+  if (params.get('embed') === '1') {
+    doc.body.classList.add('embed');
+    var pw = doc.createElement('a');
+    pw.className = 'powered'; pw.href = location.href.replace(/[?&]embed=1/, ''); pw.target = '_blank'; pw.rel = 'noopener';
+    pw.innerHTML = 'Free tool by <strong>Hi.Life</strong> — open full version ↗';
+    doc.body.appendChild(pw);
+  }
+
+  /* Rotating examples (plan page hero) */
+  $$('[data-rotate]').forEach(function (el) {
+    var items = el.getAttribute('data-rotate').split('|'), k = 0;
+    el.textContent = items[0];
+    setInterval(function () { k = (k + 1) % items.length; el.style.opacity = 0; setTimeout(function () { el.textContent = items[k]; el.style.opacity = 1; }, 250); }, 3200);
+  });
+
+  /* Tabs (home toolbox) */
+  $$('[data-tabs]').forEach(function (box) {
+    box.addEventListener('click', function (e) {
+      var b = e.target.closest('[data-tab]'); if (!b) return;
+      $$('[data-tab]', box).forEach(function (x) { x.setAttribute('aria-selected', String(x === b)); });
+      $$('[data-panel]', box).forEach(function (p) { p.hidden = p.getAttribute('data-panel') !== b.getAttribute('data-tab'); });
+    });
+  });
+
   /* In-page anchors (pages use <base href>, so bare #links would jump to the home page) + click-to-play video */
   doc.addEventListener('click', function (e) {
     var a = e.target.closest && e.target.closest('a[href^="#"]');
@@ -228,6 +271,7 @@
     if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
     function done() {
       sess.set('last_form', type);
+      window.HL.points('form-' + type, 25);
       var msg = form.getAttribute('data-inline');
       if (msg) form.innerHTML = '<div class="success" role="status"><h3>Thank you!</h3><p>' + esc(msg) + '</p></div>';
       else location.href = abs('thank-you.html?f=' + encodeURIComponent(type));
@@ -412,6 +456,9 @@
       careers: 'Application received. If there is a fit, we will reply within a week.',
       advertise: 'Thanks. We will send our media kit, audience numbers and availability within two business days.',
       contact: 'Message received. We reply to most messages within two business days.',
+      course: 'You are enrolled! Day 1 of the 7-Day Life Upgrade arrives within a few minutes — check Promotions or Spam if you do not see it.',
+      story: 'Thank you for sharing your story. Our editors read every submission and reply within a week if it is selected.',
+      embed: 'Thanks! We will send your embed code and branding options within two business days.',
       results: 'Your results are on the way to your inbox.'
     };
     if (MSG[f]) ty.textContent = MSG[f];

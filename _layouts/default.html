@@ -44,17 +44,18 @@
       <li><a href="life-score.html">Life Score</a></li>
       <li class="has-sub"><button type="button" class="sub-toggle" aria-expanded="false">Tools<span aria-hidden="true">▾</span></button>
         <div class="sub mega">
-          <div><p class="mega-h">Money</p><a href="retirement.html">Retirement &amp; FIRE</a><a href="budget.html">50/30/20 Budget</a><a href="net-worth.html">Net Worth</a><a href="debt-payoff.html">Debt Payoff Planner</a><a href="compound-interest.html">Compound Interest</a><a href="emergency-fund.html">Emergency Fund</a></div>
-          <div><p class="mega-h">Protect &amp; Home</p><a href="life-insurance.html">Life Insurance Needs</a><a href="home-affordability.html">Home Affordability</a><a href="salary.html">Salary Converter</a></div>
-          <div><p class="mega-h">Health &amp; Time</p><a href="life-in-weeks.html">Your Life in Weeks</a><a href="calories.html">Calories &amp; BMI</a><a href="sleep.html">Sleep Cycle</a><a href="habit-tracker.html">Habit Tracker</a><a class="mega-all" href="tools.html">All 14 tools →</a></div>
+          <div><p class="mega-h">Money</p><a href="retirement.html">Retirement &amp; FIRE</a><a href="budget.html">50/30/20 Budget</a><a href="net-worth.html">Net Worth</a><a href="debt-payoff.html">Debt Payoff Planner</a><a href="compound-interest.html">Compound Interest</a><a href="emergency-fund.html">Emergency Fund</a><a href="freedom-years.html">Years to Freedom</a></div>
+          <div><p class="mega-h">Protect &amp; Home</p><a href="life-insurance.html">Life Insurance Needs</a><a href="home-affordability.html">Home Affordability</a><a href="salary.html">Salary Converter</a><a href="on-track.html">Am I On Track?</a><a href="money-last.html">How Long Will My Money Last?</a></div>
+          <div><p class="mega-h">Health &amp; Time</p><a href="life-in-weeks.html">Your Life in Weeks</a><a href="calories.html">Calories &amp; BMI</a><a href="sleep.html">Sleep Cycle</a><a href="habit-tracker.html">Habit Tracker</a><a class="mega-all" href="tools.html">All 17 tools →</a></div>
         </div></li>
       <li><a href="guides/">Guides</a></li>
       <li><a href="videos.html">Videos</a></li>
       <li><a href="news.html">News</a></li>
-      <li><a href="contests.html">Contests</a></li>
+      <li><a href="life-events.html">Life Events</a></li>
     </ul></nav>
     <div class="head-actions">
       <a class="icon-btn" href="search.html" aria-label="Search"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="M20 20l-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></a>
+      <a class="head-pro" href="for-pros.html">For pros</a>
       <a class="btn btn-sun btn-sm head-cta" href="plan.html">Free Life Plan</a>
       <button id="burger" class="burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="nav"><span></span><span></span><span></span></button>
     </div>
@@ -64,6 +65,7 @@
 <main id="main" tabindex="-1">
 {% if page.section %}<nav class="crumbs wrap" aria-label="Breadcrumb"><a href="./">Home</a><span aria-hidden="true">›</span><a href="{{ page.section_url }}">{{ page.section }}</a><span aria-hidden="true">›</span><span aria-current="page">{{ page.crumb | default: ptitle }}</span></nav>{% endif %}
 {{ content }}
+{% if page.tool %}{% assign mkey = page.url | remove_first: '/' | remove: '.html' %}{% assign mth = site.data.methods[mkey] %}{% if mth %}<section class="wrap"><div class="method" id="method"><h2>How this tool works</h2><ol>{% for st in mth.steps %}<li>{{ st }}</li>{% endfor %}</ol><p><strong>Assumptions:</strong> {{ mth.assumptions }}</p><p><strong>Sources we used</strong></p><ul class="cite">{% for so in mth.sources %}<li>{% if so.url %}<a href="{{ so.url }}" target="_blank" rel="noopener">{{ so.name }}</a>{% else %}{{ so.name }}{% endif %}</li>{% endfor %}</ul><p class="stamp">Reviewed by the Hi.Life Editorial Team · Last checked {{ site.time | date: "%B %Y" }} · <a href="methodology.html">Our methodology</a> · Run a website? <a href="embed.html">Embed this tool free</a></p><div class="helpful" data-helpful="{{ page.url }}"><p>Did this tool solve your problem?</p><button class="chip" type="button" data-vote="yes">Yes</button><button class="chip" type="button" data-vote="no">Not really</button><button class="chip" type="button" data-share-native>Share</button></div><p class="points" data-points hidden></p></div></section>{% endif %}{% endif %}
 </main>
 <footer class="site-foot">
   <div class="wrap foot-grid">
@@ -73,12 +75,14 @@
       <form class="news-form" data-form="newsletter" data-subject="Newsletter signup" data-inline="You are in. Your first Sunday Upgrade arrives this weekend.">
         <label for="nlEmail">The Sunday Upgrade — one email, five ideas, every week</label>
         <div class="row"><input id="nlEmail" type="email" name="email" required placeholder="you@example.com" autocomplete="email"><button class="btn btn-sun btn-sm" type="submit">Join free</button></div>
+        <div class="nl-opts"><label><input type="radio" name="frequency" value="Weekly" checked> Weekly</label><label><input type="radio" name="frequency" value="Daily tip"> Daily tip</label><label><input type="checkbox" name="topics" value="Money" checked> Money</label><label><input type="checkbox" name="topics" value="Health" checked> Health</label><label><input type="checkbox" name="topics" value="Career"> Career</label></div>
+        <p class="nl-fine">Or take the free <a href="course.html">7-Day Life Upgrade email course</a>. Unsubscribe anytime.</p>
         <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
       </form>
     </div>
-    <div><p class="foot-h">Tools</p><a href="life-score.html">Life Score</a><a href="retirement.html">Retirement &amp; FIRE</a><a href="budget.html">Budget</a><a href="life-insurance.html">Life Insurance Needs</a><a href="life-in-weeks.html">Life in Weeks</a><a href="tools.html">All tools</a></div>
-    <div><p class="foot-h">Hi.Life</p><a href="plan.html">Free Life Upgrade Plan</a><a href="for-pros.html">For Professionals</a><a href="support.html">Support Us</a><a href="contests.html">Contests &amp; Prizes</a><a href="careers.html">Careers</a><a href="advertise.html">Advertise &amp; Sponsor</a></div>
-    <div><p class="foot-h">Trust</p><a href="about.html">About</a><a href="editorial-policy.html">Editorial Policy</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="disclaimer.html">Disclaimer</a><a href="legal.html">Trademark &amp; Copyright</a></div>
+    <div><p class="foot-h">Tools</p><a href="life-score.html">Life Score</a><a href="retirement.html">Retirement &amp; FIRE</a><a href="budget.html">Budget</a><a href="life-insurance.html">Life Insurance Needs</a><a href="life-in-weeks.html">Life in Weeks</a><a href="tools.html">All tools</a><a href="life-events.html">Life Events</a><a href="embed.html">Embed our tools</a></div>
+    <div><p class="foot-h">Hi.Life</p><a href="plan.html">Free Life Upgrade Plan</a><a href="for-pros.html">For Professionals</a><a href="support.html">Support Us</a><a href="contests.html">Contests &amp; Prizes</a><a href="careers.html">Careers</a><a href="advertise.html">Advertise &amp; Sponsor</a><a href="course.html">7-Day Email Course</a><a href="submit-story.html">Share Your Story</a></div>
+    <div><p class="foot-h">Trust</p><a href="about.html">About</a><a href="editorial-policy.html">Editorial Policy</a><a href="methodology.html">Tool Methodology</a><a href="how-we-make-money.html">How We Make Money</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="disclaimer.html">Disclaimer</a><a href="legal.html">Trademark &amp; Copyright</a></div>
   </div>
   <div class="wrap foot-base"><p>© <span data-year>{{ site.time | date: "%Y" }}</span> Hi.Life. Educational information only, not financial, medical or legal advice. Hi.Life is independent and not affiliated with any company named "Hi-Life" or "HiLife". <a href="legal.html">Full disclosure</a> · <a href="sitemap.xml">Sitemap</a></p></div>
 </footer>

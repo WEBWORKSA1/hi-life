@@ -1,0 +1,10 @@
+---
+title: "Tool Methodology & Sources"
+description: "How every Hi.Life calculator works: formulas, assumptions, data sources and review process for the Life Score, retirement, budget, debt, insurance, home, health and time tools."
+---
+<section class="page-head wrap"><p class="eyebrow">Show your work</p><h1>How our tools work</h1><p class="lede">Every Hi.Life tool uses a standard, documented method and shows its formula, assumptions and sources on the page. Here is the full list in one place.</p></section>
+<section class="wrap legal-body">
+<h2>Our principles</h2><ul><li><strong>Standard methods first.</strong> We use well-known formulas (compound growth, the 4% rule, 28/36 affordability, DIME, Mifflin–St Jeor) rather than black boxes.</li><li><strong>Ranges, not false precision.</strong> Where the future is uncertain we show a range: the compound interest tool shows ±2% returns and the retirement tool runs 1,000 market scenarios.</li><li><strong>Private by design.</strong> Calculations run in your browser; nothing is sent unless you choose to email yourself results.</li><li><strong>Reviewed and dated.</strong> Each tool shows when it was last checked.</li></ul>
+{% for m in site.data.methods %}<h2 id="{{ m[0] }}"><a href="{{ m[0] }}.html">{{ m[0] | replace: '-', ' ' | capitalize }}</a></h2><ol>{% for st in m[1].steps %}<li>{{ st }}</li>{% endfor %}</ol><p><strong>Assumptions:</strong> {{ m[1].assumptions }}</p><ul class="cite">{% for so in m[1].sources %}<li>{% if so.url %}<a href="{{ so.url }}" target="_blank" rel="noopener">{{ so.name }}</a>{% else %}{{ so.name }}{% endif %}</li>{% endfor %}</ul>{% endfor %}
+<h2>Found an error?</h2><p>Tell us through the <a href="contact.html?topic=Correction">contact form</a>. We fix confirmed errors promptly and note the change date.</p>
+</section>

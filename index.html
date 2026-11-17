@@ -1,6 +1,6 @@
 ---
 title: Hi.Life
-description: "Hi.Life is a free life-upgrade toolkit: take the 2-minute Life Score, use 14 free calculators for money, health and time, read plain-English guides and get a free personalised Life Upgrade Plan."
+description: "Hi.Life is a free life-upgrade toolkit: take the 2-minute Life Score, use 17 free calculators for money, health and time, read plain-English guides and get a free personalised Life Upgrade Plan."
 body_class: home
 ---
 <section class="hero">
@@ -10,7 +10,9 @@ body_class: home
       <h1>Say hi to your <span>best life.</span></h1>
       <p class="lede">Hi.Life helps you upgrade the six areas that make a good life — money, health, career, home, relationships and mind — with free calculators, short guides and a personal plan built around your numbers.</p>
       <div class="hero-ctas"><a class="btn btn-sun btn-lg" href="life-score.html">Get my Life Score — 2 min</a><a class="btn btn-ghost btn-lg" href="plan.html?src=hero">Free Life Upgrade Plan</a></div>
-      <div class="trust-row"><span><b>14</b> free tools</span><span><b>0</b> sign-ups needed</span><span><b>100%</b> private calculations</span><span>Updated <b data-month>this month</b></span></div>
+      <p class="flabel" style="margin:6px 0 0">I want to…</p>
+      <div class="intent" style="justify-content:flex-start;margin-top:8px"><a href="emergency-fund.html">Stop worrying about money</a><a href="freedom-years.html">Retire sooner</a><a href="debt-payoff.html">Get out of debt</a><a href="sleep.html">Sleep better</a><a href="guides/raise-your-income.html">Earn more</a><a href="guides/stress-reset.html">Feel calmer</a></div>
+      <div class="trust-row" style="margin-top:18px"><span><b>17</b> free tools</span><span><b>0</b> sign-ups needed</span><span><b>100%</b> private calculations</span><span>Updated <b data-month>this month</b></span></div>
     </div>
     <div class="hero-card">
       <p class="eyebrow">The Hi.Life wheel</p>
@@ -30,6 +32,7 @@ body_class: home
           </g>
         </g></svg></div>
       <div data-saved-score hidden></div>
+      <p class="center"><span class="points" data-points hidden></span></p>
       <p class="center" style="margin:10px 0 0"><a class="btn btn-ink btn-sm" href="life-score.html">Score my six areas</a></p>
     </div>
   </div>
@@ -50,6 +53,19 @@ body_class: home
 </section>
 
 <section class="section">
+  <div class="wrap">
+    <div class="section-head"><p class="eyebrow">What's your next step?</p><h2>Start from what's happening in your life</h2></div>
+    <div class="grid g4">
+      <a class="card event-card" style="--c:var(--home)" href="life-events.html"><h3>🏡 Buying a home</h3><p>Affordability, buy vs rent and protecting the mortgage.</p></a>
+      <a class="card event-card" style="--c:var(--career)" href="life-events.html"><h3>🚀 New job</h3><p>Salary, retirement match and a fresh budget.</p></a>
+      <a class="card event-card" style="--c:var(--money)" href="life-events.html"><h3>🌅 Planning retirement</h3><p>On track for your age? How long will it last?</p></a>
+      <a class="card event-card" style="--c:var(--love)" href="life-events.html"><h3>👶 Growing family</h3><p>Life cover, emergency fund and a bigger budget.</p></a>
+    </div>
+    <p style="margin-top:16px"><a href="life-events.html">See all 9 life events →</a></p>
+  </div>
+</section>
+
+<section class="section">
   <div class="wrap grid g2" style="align-items:start">
     <div class="card" data-tip><p class="muted">Loading today's upgrade…</p></div>
     <div class="quote-card" data-quote></div>
@@ -59,19 +75,14 @@ body_class: home
 <div class="wrap"><div class="ad-slot" data-slot="home-mid"></div></div>
 
 <section class="section section-alt">
-  <div class="wrap">
-    <div class="section-head"><p class="eyebrow">Most-used tools</p><h2>Run your numbers in under a minute</h2><p class="muted">No sign-up. Everything calculates in your browser and stays private.</p></div>
-    <div class="grid g4">
-      <a class="card" href="life-score.html"><span class="tag">Quiz</span><h3>Life Score</h3><p>12 questions to score all six areas of your life.</p></a>
-      <a class="card" href="retirement.html"><span class="tag">Money</span><h3>Retirement &amp; FIRE</h3><p>Your nest egg, gap and financial-independence age.</p></a>
-      <a class="card" href="life-insurance.html"><span class="tag">Protect</span><h3>Life Insurance Needs</h3><p>How much cover your family actually needs (DIME).</p></a>
-      <a class="card" href="life-in-weeks.html"><span class="tag">Mind</span><h3>Your Life in Weeks</h3><p>Every week of your life on one page.</p></a>
-      <a class="card" href="debt-payoff.html"><span class="tag">Money</span><h3>Debt Payoff Planner</h3><p>Avalanche vs snowball and your debt-free date.</p></a>
-      <a class="card" href="home-affordability.html"><span class="tag">Home</span><h3>Home Affordability</h3><p>How much house you can comfortably afford.</p></a>
-      <a class="card" href="calories.html"><span class="tag">Health</span><h3>Calories &amp; BMI</h3><p>Maintenance calories, BMI and protein target.</p></a>
-      <a class="card" href="sleep.html"><span class="tag">Health</span><h3>Sleep Cycle</h3><p>The best time to sleep for your alarm.</p></a>
-    </div>
-    <p class="center" style="margin-top:24px"><a class="btn btn-ghost" href="tools.html">See all 14 tools</a></p>
+  <div class="wrap" data-tabs>
+    <div class="section-head"><p class="eyebrow">Free toolbox</p><h2>Run your numbers in under a minute</h2><p class="muted">No sign-up. Everything calculates in your browser and stays private.</p></div>
+    <div class="tabs" role="tablist"><button type="button" role="tab" data-tab="money" aria-selected="true">Grow money</button><button type="button" role="tab" data-tab="protect" aria-selected="false">Protect & retire</button><button type="button" role="tab" data-tab="home" aria-selected="false">Home & career</button><button type="button" role="tab" data-tab="health" aria-selected="false">Health & mind</button></div>
+    <div class="grid g4" data-panel="money"><a class="card" href="retirement.html"><span class="tag">Money</span><h3>Retirement & FIRE</h3><p>Nest egg, gap and a 1,000-scenario stress test.</p></a><a class="card" href="freedom-years.html"><span class="tag">Money</span><h3>Years to Freedom</h3><p>How your savings rate sets your retirement date.</p></a><a class="card" href="debt-payoff.html"><span class="tag">Money</span><h3>Debt Payoff Planner</h3><p>Avalanche vs snowball and your debt-free date.</p></a><a class="card" href="budget.html"><span class="tag">Money</span><h3>50/30/20 Budget</h3><p>Targets, overages and a CSV you can keep.</p></a></div>
+    <div class="grid g4" data-panel="protect" hidden><a class="card" href="life-insurance.html"><span class="tag">Protect</span><h3>Life Insurance Needs</h3><p>How much cover your family needs (DIME).</p></a><a class="card" href="emergency-fund.html"><span class="tag">Protect</span><h3>Emergency Fund</h3><p>Risk-adjusted months of safety.</p></a><a class="card" href="on-track.html"><span class="tag">Retire</span><h3>Am I On Track?</h3><p>Your savings vs the milestone for your age.</p></a><a class="card" href="money-last.html"><span class="tag">Retire</span><h3>How Long Will It Last?</h3><p>Withdrawals, inflation and the 30-year number.</p></a></div>
+    <div class="grid g4" data-panel="home" hidden><a class="card" href="home-affordability.html"><span class="tag">Home</span><h3>Home Affordability</h3><p>28/36 and comfortable price.</p></a><a class="card" href="salary.html"><span class="tag">Career</span><h3>Salary Converter</h3><p>Hourly to yearly and what a raise is worth.</p></a><a class="card" href="net-worth.html"><span class="tag">Money</span><h3>Net Worth Tracker</h3><p>Private monthly snapshots.</p></a><a class="card" href="compound-interest.html"><span class="tag">Money</span><h3>Compound Interest</h3><p>Growth with a realistic ±2% range.</p></a></div>
+    <div class="grid g4" data-panel="health" hidden><a class="card" href="life-score.html"><span class="tag">Quiz</span><h3>Life Score</h3><p>12 questions across six areas.</p></a><a class="card" href="life-in-weeks.html"><span class="tag">Mind</span><h3>Life in Weeks</h3><p>Log each week: enjoy, build or both.</p></a><a class="card" href="calories.html"><span class="tag">Health</span><h3>Calories & BMI</h3><p>Maintenance calories and protein.</p></a><a class="card" href="sleep.html"><span class="tag">Health</span><h3>Sleep Cycle</h3><p>Best bedtime for your alarm.</p></a></div>
+    <p class="center" style="margin-top:24px"><a class="btn btn-ghost" href="tools.html">See all 17 tools</a></p>
   </div>
 </section>
 
@@ -81,7 +92,8 @@ body_class: home
       <p class="eyebrow" style="color:var(--sun)">Free Life Upgrade Plan</p>
       <h2>Get a plan built around your life — not a template</h2>
       <p>Tell us where you are and where you want to be. Within 48 hours you get a personalised action plan by email and, if you want one, an introduction to <strong>one</strong> vetted professional who fits your situation.</p>
-      <ul class="check-list"><li>Financial planners, insurance advisers and mortgage pros</li><li>Career, health and life coaches</li><li>No cost, no obligation, never sold to call centres</li></ul>
+      <ol class="steps" style="margin-top:18px"><li><strong>Answer a few questions</strong> about your goal and timeline.</li><li><strong>Get your written plan</strong> by email within 48 hours.</li><li><strong>Optional:</strong> a free intro call with one vetted pro — a financial planner, insurance adviser, mortgage pro or coach.</li></ol>
+      <div class="microcopy" style="color:#cfd6e4"><span>No credit check</span><span>No obligation</span><span>Never sold to call centres</span></div>
     </div>
     <div class="lead-form">
       <h3>Start in 30 seconds</h3>
@@ -94,6 +106,18 @@ body_class: home
         <a class="opt" href="plan.html?focus=Health&src=home-pick"><span>💪 Health<small>energy, weight, sleep</small></span></a>
         <a class="opt" href="plan.html?focus=Mind&src=home-pick"><span>🧠 Mind &amp; relationships<small>stress, goals, connection</small></span></a>
       </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head"><p class="eyebrow">Why trust Hi.Life</p><h2>Built to be useful, honest and private</h2></div>
+    <div class="trust-grid">
+      <div><b>Show our work</b><p>Every tool lists its formula, assumptions and sources. <a href="methodology.html">Methodology</a></p></div>
+      <div><b>Private</b><p>Your numbers stay in your browser. No account, no tracking of what you type.</p></div>
+      <div><b>Independent</b><p>Ads and referral fees never change the maths. <a href="how-we-make-money.html">How we make money</a></p></div>
+      <div><b>Kept current</b><p>Pages show when they were last checked. <a href="editorial-policy.html">Editorial policy</a></p></div>
     </div>
   </div>
 </section>
@@ -118,6 +142,7 @@ body_class: home
 
 <section class="section">
   <div class="wrap">
+    <aside class="lead-cta" style="margin-top:0"><div><p class="eyebrow">Free email course</p><h3>The 7-Day Life Upgrade</h3><p>One 5-minute lesson a day: money, health, career, home, relationships and mind — plus a printable workbook.</p></div><a class="btn btn-sun" href="course.html?src=home">Send me Day 1</a></aside>
     <div class="section-head"><p class="eyebrow">Today's headlines</p><h2>Money, health &amp; life news</h2><p class="muted">Refreshed automatically every day from trusted public sources.</p></div>
     <div data-news="8"></div>
     <p><a href="news.html">More news →</a></p>
