@@ -26,7 +26,7 @@ Principal repayments on a mortgage are not "spent" — they become equity — so
 
 ## The 5% rule
 
-A quick shortcut popularised by some financial educators: the yearly unrecoverable cost of owning is roughly **5% of the home's value** (about 1% property tax + 1% maintenance + ~3% cost of capital). Divide the home price by 20 to get a monthly-ish yearly figure, then divide by 12.
+A quick shortcut popularised by some financial educators: the yearly unrecoverable cost of owning is roughly **5% of the home's value** (about 1% property tax + 1% maintenance + ~3% cost of capital). Multiply the home price by 5% for the yearly cost, then divide by 12 for a monthly figure.
 
 *Example*: a 500,000 home × 5% = 25,000 a year ≈ 2,083 a month. If you can rent a similar home for less than that, renting and investing the difference may leave you wealthier. Rates, taxes and local prices change the numbers, so treat it as a starting point.
 
