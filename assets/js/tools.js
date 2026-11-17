@@ -59,6 +59,23 @@
     if (series.length > 1) svg += '<div class="legend">' + series.map(function (s) { return '<span style="--c:' + s.color + '">' + esc(s.name) + '</span>'; }).join('') + '</div>';
     el.innerHTML = svg;
   }
+  var lastCsv = null;
+  function csv(name, rows) {
+    lastCsv = { name: name, rows: rows };
+    return '<p style="margin-top:12px"><button type="button" class="chip" data-csv>⬇ Download as spreadsheet (CSV)</button></p>';
+  }
+  root.addEventListener('click', function (e) {
+    if (!e.target.closest('[data-csv]') || !lastCsv) return;
+    var txt = lastCsv.rows.map(function (r) { return r.map(function (c) { c = String(c == null ? '' : c); return /[",\n]/.test(c) ? '"' + c.replace(/"/g, '""') + '"' : c; }).join(','); }).join('\n');
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([txt], { type: 'text/csv' }));
+    a.download = 'hi-life-' + lastCsv.name + '.csv';
+    document.body.appendChild(a); a.click(); a.remove();
+    if (H.points) H.points('csv-' + lastCsv.name, 5);
+  });
+  /* simple seeded random so the same inputs always give the same Monte Carlo answer */
+  function rng(seed) { return function () { seed |= 0; seed = seed + 0x6D2B79F5 | 0; var t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+  function gauss(r) { var u = 1 - r(), v = r(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); }
   function short(v) { return v >= 1e6 ? (v / 1e6).toFixed(1) + 'M' : v >= 1e3 ? Math.round(v / 1e3) + 'k' : Math.round(v); }
 
   /* currency picker shared by all money tools */
@@ -151,18 +168,27 @@
       var nb = new Date(now.getFullYear(), b.getMonth(), b.getDate()); if (nb < now) nb.setFullYear(nb.getFullYear() + 1);
       var toBd = Math.ceil((nb - now) / 864e5);
       var milestones = { 18: 1, 30: 1, 40: 1, 50: 1, 65: 1 };
+      var wlog = store.get('weeklog', {});
       var cells = '';
       for (var w = 0; w < total; w++) {
-        var cls = w < lived ? 'l' : w === lived ? 'now' : (milestones[w / 52] ? 'm' : '');
+        var cls = w < lived ? (wlog[w] ? 'w-' + wlog[w] : 'l') : w === lived ? 'now' : (milestones[w / 52] ? 'm' : '');
         cells += '<i class="' + cls + '"></i>';
       }
       var summers = Math.max(0, Math.floor(exp - age));
       out('result', '<p class="eyebrow">Your life so far</p><p class="result-big">' + num(lived) + ' weeks</p><p class="result-sub">' + num(age, 1) + ' years · ' + Math.min(100, (lived / total * 100)).toFixed(1) + '% of a ' + exp + '-year life</p>' +
         '<div class="kpis">' + kpi('Weeks ahead', num(left)) + kpi('Days lived', num(Math.floor((now - b) / 864e5))) + kpi('Summers ahead (approx.)', num(summers)) + kpi('Next birthday', toBd === 365 || toBd === 0 ? 'Today! 🎉' : 'in ' + toBd + ' days') + kpi('Heartbeats (approx.)', short(Math.floor((now - b) / 6e4) * 70)) + kpi('Full moons seen', num(Math.floor((now - b) / (29.53 * 864e5)))) + '</div>' +
-        '<div class="weeks" aria-label="Grid of ' + total + ' weeks, ' + lived + ' lived">' + cells + '</div><div class="legend"><span style="--c:var(--ink-2)">Lived</span><span style="--c:var(--coral)">This week</span><span style="--c:var(--sun)">Milestone birthdays</span><span style="--c:#eadfcd">Ahead</span></div>' +
+        '<div class="weeks" aria-label="Grid of ' + total + ' weeks, ' + lived + ' lived">' + cells + '</div><div class="legend"><span style="--c:var(--ink-2)">Lived</span><span style="--c:var(--coral)">This week</span><span style="--c:var(--sun)">Milestone birthdays</span><span style="--c:#eadfcd">Ahead</span><span style="--c:var(--mint)">Enjoyed</span><span style="--c:var(--sky)">Built</span><span style="--c:var(--plum)">Both</span><span style="--c:#9aa3b5">Neither</span></div>' +
+        '<div class="panel" style="margin-top:14px;box-shadow:none"><p class="flabel">How was last week? (week ' + num(lived) + ')</p><p class="fine" style="margin-top:0">A week is well spent if you enjoyed it, if it built something for your future, or both. Log it and your grid fills with colour.</p><div class="share-row">' + [['enjoy', 'Enjoyed it'], ['build', 'Built my future'], ['both', 'Both'], ['neither', 'Neither']].map(function (o) { return '<button type="button" class="chip" data-wk="' + o[0] + '" data-w="' + (lived - 1) + '" aria-pressed="' + (wlog[lived - 1] === o[0]) + '">' + o[1] + '</button>'; }).join('') + '<button type="button" class="chip" data-print>🖨 Print my life calendar</button></div>' + (function () { var c = { enjoy: 0, build: 0, both: 0, neither: 0 }, t = 0; Object.keys(wlog).forEach(function (k) { c[wlog[k]]++; t++; }); return t ? '<p class="fine">Logged ' + t + ' week' + (t === 1 ? '' : 's') + ': ' + c.enjoy + ' enjoyed · ' + c.build + ' built · ' + c.both + ' both · ' + c.neither + ' neither.</p>' : ''; })() + '</div>' +
         '<div class="tips"><strong>Make the next 52 count.</strong> If you spent just 3 hours a week on one goal, that is ' + num(left * 3) + ' hours over the rest of your life — enough to master several skills.</div>');
     });
   };
+
+  root.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-wk]'); if (!b) return;
+    var wl = store.get('weeklog', {}); wl[b.getAttribute('data-w')] = b.getAttribute('data-wk'); store.set('weeklog', wl);
+    if (H.points) H.points('weeklog', 3);
+    root.dispatchEvent(new Event('input'));
+  });
 
   /* ---------- 3. Retirement & FIRE ---------- */
   T.retirement = function () {
@@ -177,11 +203,23 @@
       var gap = target - proj;
       var fv = Math.pow(1 + r, yrs), annuity = r ? (fv - 1) / r : yrs;
       var reqMonthly = gap > 0 && yrs > 0 ? Math.max(0, (target - bal * fv) / annuity / 12) : 0;
+      var R = rng(Math.round(age * 7 + ra * 13 + bal + m * 3 + spend + r * 1e4)), ok = 0, SIMS = 1000, plan = Math.max(ra + 25, 95);
+      for (var sIdx = 0; sIdx < SIMS; sIdx++) {
+        var x = bal, alive = true;
+        for (var yy = age; yy < plan; yy++) {
+          var ret = r + 0.12 * gauss(R);
+          if (yy < ra) x = x * (1 + ret) + m * 12;
+          else { x = x * (1 + ret) - spend * Math.pow(1 + inf, yy - age); if (x <= 0) { alive = false; break; } }
+        }
+        if (alive) ok++;
+      }
+      var success = Math.round(ok / SIMS * 100);
       var fireAge = null; b = bal;
       for (var k = 0; k <= 60; k++) { if (b >= spend * Math.pow(1 + inf, k) / wr) { fireAge = age + k; break; } b = b * (1 + r) + m * 12; }
       out('result', '<p class="eyebrow">At age ' + ra + ' you could have</p><p class="result-big">' + money(proj) + '</p><p class="result-sub">≈ ' + money(real) + ' in today\'s money</p>' +
         '<div class="bar"><i style="width:' + Math.min(100, proj / target * 100).toFixed(0) + '%"></i></div><p class="result-sub">' + Math.min(100, proj / target * 100).toFixed(0) + '% of your target nest egg of ' + money(target) + '</p>' +
-        '<div class="kpis">' + kpi('Your FIRE number today', money(spend / wr)) + kpi('Financial independence age', fireAge ? fireAge : '60+ yrs away') + kpi(gap > 0 ? 'Shortfall' : 'Surplus', money(Math.abs(gap))) + kpi('Monthly saving needed', gap > 0 ? money(reqMonthly) : 'On track ✓') + '</div><div id="rChart"></div>' +
+        '<div class="kpis">' + kpi('Your FIRE number today', money(spend / wr)) + kpi('Financial independence age', fireAge ? fireAge : '60+ yrs away') + kpi(gap > 0 ? 'Shortfall' : 'Surplus', money(Math.abs(gap))) + kpi('Monthly saving needed', gap > 0 ? money(reqMonthly) : 'On track ✓') + '</div>' +
+        '<div class="mc"><p class="eyebrow">Stress test · 1,000 market scenarios</p><p class="result-big" style="font-size:2.2rem;color:' + (success >= 85 ? 'var(--mint)' : success >= 65 ? 'var(--home)' : 'var(--coral)') + '">' + success + '%</p><p class="result-sub">of simulated markets (average ' + (r * 100).toFixed(1) + '% a year, ±12% swings) your money lasts to age ' + plan + '. ' + (success >= 85 ? 'Robust plan.' : success >= 65 ? 'Workable, but add a buffer: save more, retire a little later or plan flexible spending.' : 'Fragile. Small changes now make a big difference.') + '</p></div><div id="rChart"></div>' +
         '<div class="tips"><strong>What moves the needle most</strong><ul><li>Each extra ' + money(100) + '/month adds ≈ ' + money(100 * 12 * annuity) + ' by ' + ra + '.</li><li>Retiring 2 years later adds ≈ ' + money(proj * Math.pow(1 + r, 2) + m * 24 - proj) + ' and shortens the drawdown.</li><li>Fees matter: 1% a year can cost a quarter of your final balance over 30+ years.</li></ul></div>');
       lineChart($('#rChart'), [{ name: 'Projected savings', data: data, color: '#16b8a6', fill: true }, { name: 'Nest egg needed', data: need, color: '#ff5a4e' }], { label: 'Savings projection', xl: ['Age ' + age, 'Age ' + ra] });
     });
@@ -197,7 +235,7 @@
       out('result', '<p class="eyebrow">Your 50/30/20 targets</p><p class="result-big">' + money(tS) + '<small style="font-size:1rem;color:var(--muted)"> / month to savings & debt</small></p>' +
         '<div class="table-wrap"><table class="table"><tr><th>Bucket</th><th>Target</th><th>You</th><th>Share</th></tr>' + row('Needs (50%)', needs, tN, function (a, t) { return a <= t; }) + row('Wants (30%)', wants, tW, function (a, t) { return a <= t; }) + row('Savings & debt (20%)', save, tS, function (a, t) { return a >= t; }) + '</table></div>' +
         '<div class="kpis">' + kpi('Unassigned money', money(left)) + kpi('Savings rate', inc ? (save / inc * 100).toFixed(0) + '%' : '—') + kpi('Yearly savings', money(save * 12)) + kpi('Saved in 10 yrs at 6%', money(save * 12 * ((Math.pow(1.06, 10) - 1) / .06))) + '</div>' +
-        '<div class="tips"><strong>Quick read</strong><ul>' + (needs > tN ? '<li>Needs are ' + money(needs - tN) + ' over target: housing, transport and insurance are the big three to renegotiate.</li>' : '<li>Needs are within target. Nice.</li>') + (wants > tW ? '<li>Wants are ' + money(wants - tW) + ' over: cancel one subscription and set a weekly fun budget.</li>' : '') + (save < tS ? '<li>Automate ' + money(tS - save) + ' more on payday so savings happen first.</li>' : '<li>You are saving at least 20%. Point the extra at investments or debt.</li>') + (left < 0 ? '<li>You are spending ' + money(-left) + ' more than you earn each month. Fix this first.</li>' : '') + '</ul></div>');
+        '<div class="tips"><strong>Quick read</strong><ul>' + (needs > tN ? '<li>Needs are ' + money(needs - tN) + ' over target: housing, transport and insurance are the big three to renegotiate.</li>' : '<li>Needs are within target. Nice.</li>') + (wants > tW ? '<li>Wants are ' + money(wants - tW) + ' over: cancel one subscription and set a weekly fun budget.</li>' : '') + (save < tS ? '<li>Automate ' + money(tS - save) + ' more on payday so savings happen first.</li>' : '<li>You are saving at least 20%. Point the extra at investments or debt.</li>') + (left < 0 ? '<li>You are spending ' + money(-left) + ' more than you earn each month. Fix this first.</li>' : '') + '</ul></div>' + csv('budget', [['Bucket', 'Target', 'Actual'], ['Needs (50%)', Math.round(tN), needs], ['Wants (30%)', Math.round(tW), wants], ['Savings & debt (20%)', Math.round(tS), save], ['Take-home pay', inc, used]]));
     });
   };
 
@@ -214,7 +252,7 @@
         '<div class="kpis">' + kpi('Total assets', money(A)) + kpi('Total debts', money(L)) + kpi('Debt-to-asset ratio', A ? (L / A * 100).toFixed(0) + '%' : '—') + kpi('"Wealth benchmark" (age × income ÷ 10)', stanley ? money(stanley) : 'add age & income') + '</div>' +
         (stanley ? '<div class="bar"><i style="width:' + Math.max(0, Math.min(100, nw / stanley * 100)).toFixed(0) + '%"></i></div><p class="result-sub">' + Math.max(0, nw / stanley * 100).toFixed(0) + '% of the classic benchmark from <em>The Millionaire Next Door</em>.</p>' : '') +
         '<p><button type="button" class="btn btn-ink btn-sm" id="nwSave">Save this snapshot</button></p>' +
-        (hist.length ? '<div class="table-wrap"><table class="table"><tr><th>Date</th><th>Net worth</th></tr>' + hist.slice(-8).reverse().map(function (h) { return '<tr><td>' + esc(h.d) + '</td><td>' + money(h.v) + '</td></tr>'; }).join('') + '</table></div>' : '<p class="fine">Save a snapshot each month to track your progress. Snapshots stay in this browser only.</p>'));
+        (hist.length ? '<div class="table-wrap"><table class="table"><tr><th>Date</th><th>Net worth</th></tr>' + hist.slice(-8).reverse().map(function (h) { return '<tr><td>' + esc(h.d) + '</td><td>' + money(h.v) + '</td></tr>'; }).join('') + '</table></div>' : '<p class="fine">Save a snapshot each month to track your progress. Snapshots stay in this browser only.</p>') + csv('net-worth', [['Item', 'Amount']].concat([['Cash & savings', val('nwCash')], ['Investments', val('nwInvest')], ['Retirement accounts', val('nwRetire')], ['Home', val('nwHome')], ['Vehicles', val('nwCar')], ['Other assets', val('nwOther')], ['Mortgage', -val('nwMortgage')], ['Car loans', -val('nwCarLoan')], ['Student loans', -val('nwStudent')], ['Credit cards', -val('nwCards')], ['Other debts', -val('nwOtherDebt')], ['NET WORTH', nw]]).concat(hist.map(function (h) { return ['Snapshot ' + h.d, h.v]; }))));
       var sb = $('#nwSave');
       if (sb) sb.onclick = function () { hist.push({ d: new Date().toLocaleDateString(), v: nw }); store.set('nw_hist', hist.slice(-36)); H.toast('Snapshot saved'); root.dispatchEvent(new Event('input')); };
     });
@@ -250,7 +288,7 @@
       var df = new Date(); df.setMonth(df.getMonth() + av.months);
       out('result', '<p class="eyebrow">Debt-free date (avalanche)</p><p class="result-big">' + df.toLocaleDateString(undefined, { month: 'long', year: 'numeric' }) + '</p><p class="result-sub">' + Math.floor(av.months / 12) + ' yrs ' + (av.months % 12) + ' mos to clear ' + money(total) + '</p>' +
         '<div class="table-wrap"><table class="table"><tr><th>Method</th><th>Months</th><th>Total interest</th><th>Payoff order</th></tr><tr><td><strong>Avalanche</strong> (highest rate first)</td><td>' + av.months + '</td><td>' + money(av.interest) + '</td><td>' + esc(av.order.join(' → ')) + '</td></tr><tr><td><strong>Snowball</strong> (smallest balance first)</td><td>' + sn.months + '</td><td>' + money(sn.interest) + '</td><td>' + esc(sn.order.join(' → ')) + '</td></tr><tr><td>Minimums only</td><td>' + (base.months >= 600 ? '50+ yrs' : base.months) + '</td><td>' + money(base.interest) + '</td><td>—</td></tr></table></div>' +
-        '<div class="tips"><strong>Verdict</strong><ul><li>Avalanche saves ' + money(Math.max(0, sn.interest - av.interest)) + ' versus snowball.</li>' + (extra ? '<li>Your extra ' + money(extra) + '/month saves ' + money(Math.max(0, base.interest - av.interest)) + ' in interest and ' + Math.max(0, base.months - av.months) + ' months.</li>' : '<li>Add even ' + money(50) + '/month extra to see how much faster you finish.</li>') + '<li>If you need quick wins to stay motivated, snowball is fine — finishing beats optimising.</li></ul></div>');
+        '<div class="tips"><strong>Verdict</strong><ul><li>Avalanche saves ' + money(Math.max(0, sn.interest - av.interest)) + ' versus snowball.</li>' + (extra ? '<li>Your extra ' + money(extra) + '/month saves ' + money(Math.max(0, base.interest - av.interest)) + ' in interest and ' + Math.max(0, base.months - av.months) + ' months.</li>' : '<li>Add even ' + money(50) + '/month extra to see how much faster you finish.</li>') + '<li>If you need quick wins to stay motivated, snowball is fine — finishing beats optimising.</li></ul></div>' + csv('debt-payoff', [['Debt', 'Balance', 'Rate %', 'Minimum']].concat(debts.map(function (d) { return [d.n, d.b, d.r, d.m]; })).concat([[], ['Method', 'Months', 'Total interest', 'Payoff order'], ['Avalanche', av.months, Math.round(av.interest), av.order.join(' > ')], ['Snowball', sn.months, Math.round(sn.interest), sn.order.join(' > ')], ['Minimums only', base.months, Math.round(base.interest), '']])));
     });
   };
 
@@ -265,8 +303,12 @@
         contrib += M * 12; data.push(bal); cdata.push(contrib);
         rows.push('<tr><td>' + yr + '</td><td>' + money(contrib) + '</td><td>' + money(bal - contrib) + '</td><td><strong>' + money(bal) + '</strong></td></tr>');
       }
+      function fvAt(rr) { var bb = P; for (var q = 0; q < y * n; q++) bb = bb * (1 + rr / n) + M * 12 / n; return bb; }
+      var loR = Math.max(0, r - 0.02), hiR = r + 0.02, lo = fvAt(loR), hi = fvAt(hiR);
+      var csvRows = [['Year', 'Contributed', 'Interest', 'Balance']];
+      for (var cy = 1; cy <= y; cy++) csvRows.push([cy, Math.round(cdata[cy]), Math.round(data[cy] - cdata[cy]), Math.round(data[cy])]);
       var dbl = r ? Math.log(2) / Math.log(1 + r / n) / n : 0;
-      out('result', '<p class="eyebrow">After ' + y + ' years</p><p class="result-big">' + money(bal) + '</p><div class="kpis">' + kpi('You put in', money(contrib)) + kpi('Interest earned', money(bal - contrib)) + kpi('Money doubles every', dbl ? num(dbl, 1) + ' yrs' : '—') + kpi('Interest share of total', bal ? ((bal - contrib) / bal * 100).toFixed(0) + '%' : '—') + '</div><div id="ciChart"></div><details><summary>Year-by-year table</summary><div class="table-wrap"><table class="table"><tr><th>Year</th><th>Contributed</th><th>Interest</th><th>Balance</th></tr>' + rows.join('') + '</table></div></details>');
+      out('result', '<p class="eyebrow">After ' + y + ' years</p><p class="result-big">' + money(bal) + '</p><div class="kpis">' + kpi('You put in', money(contrib)) + kpi('Interest earned', money(bal - contrib)) + kpi('Money doubles every', dbl ? num(dbl, 1) + ' yrs' : '—') + kpi('Interest share of total', bal ? ((bal - contrib) / bal * 100).toFixed(0) + '%' : '—') + kpi('If returns are 2% lower (' + (loR * 100).toFixed(1) + '%)', money(lo)) + kpi('If returns are 2% higher (' + (hiR * 100).toFixed(1) + '%)', money(hi)) + '</div><div id="ciChart"></div><details><summary>Year-by-year table</summary><div class="table-wrap"><table class="table"><tr><th>Year</th><th>Contributed</th><th>Interest</th><th>Balance</th></tr>' + rows.join('') + '</table></div></details>' + csv('compound-interest', csvRows));
       lineChart($('#ciChart'), [{ name: 'Balance', data: data, color: '#16b8a6', fill: true }, { name: 'Your contributions', data: cdata, color: '#ffb703' }], { label: 'Growth chart', xl: ['Year 0', 'Year ' + y] });
     });
   };
@@ -360,7 +402,8 @@
         var d = new Date(base.getTime() + (mode === 'wake' ? -1 : 1) * (c * 90 + fall) * 6e4);
         list.push('<div class="kpi"><span>' + c + ' cycles · ' + (c * 1.5) + ' h sleep' + (c >= 5 ? ' · recommended' : '') + '</span><b>' + f(d) + '</b></div>');
       }
-      out('result', '<p class="eyebrow">' + (mode === 'wake' ? 'To wake at ' + f(base) + ', fall asleep by…' : 'Going to bed at ' + f(base) + '? Set an alarm for…') + '</p><div class="kpis">' + list.join('') + '</div><div class="tips"><strong>Why cycles?</strong> Sleep runs in roughly 90-minute cycles. Waking at the end of a cycle, rather than in deep sleep, usually feels easier. Adults need 7–9 hours; a fixed wake-up time matters more than a perfect bedtime.</div>');
+      out('result', '<p class="eyebrow">' + (mode === 'wake' ? 'To wake at ' + f(base) + ', fall asleep by…' : 'Going to bed at ' + f(base) + '? Set an alarm for…') + '</p><div class="kpis">' + list.join('') + '</div><div class="tips"><strong>Why cycles?</strong> Sleep runs in roughly 90-minute cycles. Waking at the end of a cycle, rather than in deep sleep, usually feels easier. Adults need 7–9 hours; a fixed wake-up time matters more than a perfect bedtime.</div>' +
+        '<div class="table-wrap" style="margin-top:14px"><table class="table"><tr><th>Age</th><th>Recommended sleep per 24 h</th></tr><tr><td>Teens 14–17</td><td>8–10 hours</td></tr><tr><td>Young adults 18–25</td><td>7–9 hours</td></tr><tr><td>Adults 26–64</td><td>7–9 hours</td></tr><tr><td>Older adults 65+</td><td>7–8 hours</td></tr></table></div><p class="fine">Ranges from the Sleep Foundation\'s medically reviewed age table. Cycle length varies from about 70 to 120 minutes, so treat times as a planning estimate.</p>');
     });
   };
 
@@ -388,5 +431,64 @@
     draw();
   };
 
-  if (T[tool]) T[tool]();
+  /* ---------- 15. Years to financial freedom (savings rate) ---------- */
+  T['freedom-years'] = function () {
+    persist('fy');
+    function yearsTo(inc, spend, start, r, wr) {
+      var save = inc - spend; if (spend <= 0) return 0;
+      var target = spend * 12 / wr, b = start, y = 0;
+      if (save <= 0 && b < target) return Infinity;
+      while (b < target && y < 100) { b = b * (1 + r) + save * 12; y++; }
+      return y >= 100 ? Infinity : y;
+    }
+    live(function () {
+      var inc = val('fyInc'), spend = val('fySpend'), start = val('fyStart'), r = val('fyReturn') / 100, wr = val('fyWr') / 100 || 0.04;
+      var rate = inc ? (inc - spend) / inc : 0, yrs = yearsTo(inc, spend, start, r, wr), target = spend * 12 / wr;
+      var pts = [], rows = [['Savings rate', 'Years to financial independence']];
+      for (var sr = 5; sr <= 75; sr += 5) { var ysr = yearsTo(inc, inc * (1 - sr / 100), start, r, wr); pts.push(isFinite(ysr) ? ysr : 60); rows.push([sr + '%', isFinite(ysr) ? ysr : '60+']); }
+      var y2 = yearsTo(inc, spend - inc * 0.05, start, r, wr);
+      out('result', '<p class="eyebrow">Your savings rate is ' + (rate * 100).toFixed(0) + '%</p><p class="result-big">' + (isFinite(yrs) ? yrs + ' years' : 'Never at this rate') + '</p><p class="result-sub">to financial independence (' + money(target) + ' invested)</p>' +
+        '<div class="kpis">' + kpi('Saved per year', money((inc - spend) * 12)) + kpi('Freedom age if you are 30 today', isFinite(yrs) ? 30 + yrs : '—') + kpi('Save 5% more of your pay', isFinite(y2) ? y2 + ' years (' + (isFinite(yrs) ? (yrs - y2) + ' sooner' : '') + ')' : '—') + kpi('Your FI number', money(target)) + '</div>' +
+        '<div class="table-wrap"><table class="table"><tr><th>Savings rate</th>' + [10, 20, 30, 40, 50, 60, 70].map(function (q) { return '<th>' + q + '%</th>'; }).join('') + '</tr><tr><td><strong>Years</strong></td>' + [10, 20, 30, 40, 50, 60, 70].map(function (q) { var t = yearsTo(inc, inc * (1 - q / 100), start, r, wr); return '<td>' + (isFinite(t) ? t : '60+') + '</td>'; }).join('') + '</tr></table></div>' +
+        '<div id="fyChart"></div><div class="tips"><strong>Why the curve bends:</strong> a higher savings rate grows your investments faster <em>and</em> lowers the amount you need, because you have proven you can live on less. Moving from 10% to 25% usually cuts decades off.</div>' + csv('freedom-years', rows));
+      lineChart($('#fyChart'), [{ name: 'Years to freedom', data: pts, color: '#8b5cf6', fill: true }], { label: 'Years to financial independence by savings rate', xl: ['5% saved', '75% saved'] });
+    });
+  };
+
+  /* ---------- 16. Am I on track? (retirement savings by age) ---------- */
+  T['on-track'] = function () {
+    persist('ot');
+    var M = [[25, 0.5], [30, 1], [35, 2], [40, 3], [45, 4], [50, 6], [55, 7], [60, 8], [67, 10]];
+    function mult(a) { if (a <= M[0][0]) return M[0][1]; for (var i = 1; i < M.length; i++) if (a <= M[i][0]) { var p = M[i - 1], q = M[i]; return p[1] + (q[1] - p[1]) * (a - p[0]) / (q[0] - p[0]); } return 10; }
+    live(function () {
+      var age = val('otAge'), sal = val('otSalary'), have = val('otSaved'), adj = (+$('#otRetire').value) * (+$('#otLife').value);
+      var m = mult(age) * adj, target = m * sal, pct = target ? have / target * 100 : 0;
+      var yrs = Math.max(1, 67 - age), goal = 10 * adj * sal, r = 0.05, fv = have * Math.pow(1 + r, yrs), need = Math.max(0, (goal - fv) * r / (Math.pow(1 + r, yrs) - 1) / 12);
+      var status = pct >= 100 ? ['On track', 'var(--mint)', 'You are at or ahead of the milestone for your age. Keep your savings rate steady and avoid lifestyle creep.'] : pct >= 70 ? ['Close', 'var(--home)', 'You are within reach. A 1–3% increase in your savings rate usually closes this gap.'] : ['Behind', 'var(--coral)', 'Do not panic — but act. Capture any employer match, raise your savings rate each year and review your plan.'];
+      out('result', '<p class="eyebrow">Milestone for age ' + age + '</p><p class="result-big">' + num(m, 1) + '× your salary</p><p class="result-sub">= ' + money(target) + ' saved for retirement</p>' +
+        '<div class="bar"><i style="width:' + Math.min(100, pct).toFixed(0) + '%;background:' + status[1] + '"></i></div><p><strong style="color:' + status[1] + '">' + status[0] + '</strong> · you have ' + Math.round(pct) + '% of the milestone. ' + status[2] + '</p>' +
+        '<div class="kpis">' + kpi('Gap to milestone', money(Math.max(0, target - have))) + kpi('Target at 67', money(goal)) + kpi('Monthly saving to reach it (5% return)', need ? money(need) : 'On track ✓') + kpi('Savings rate that implies', sal ? Math.round(need * 12 / sal * 100) + '% of salary' : '—') + '</div>' +
+        '<div class="table-wrap"><table class="table"><tr><th>Age</th>' + M.slice(1).map(function (x) { return '<th>' + x[0] + '</th>'; }).join('') + '</tr><tr><td>Multiple</td>' + M.slice(1).map(function (x) { return '<td>' + num(x[1] * adj, 1) + '×</td>'; }).join('') + '</tr></table></div>' +
+        '<p class="fine">Milestones follow a widely used savings-by-age guideline (about 1× salary by 30, 3× by 40, 6× by 50, 8× by 60 and 10× by 67), assuming saving about 15% a year from age 25 and retiring at 67. Adjusted for your retirement age and lifestyle. Not a guarantee.</p>');
+    });
+  };
+
+  /* ---------- 17. How long will my money last? ---------- */
+  T['money-last'] = function () {
+    persist('ml');
+    live(function () {
+      var bal = val('mlBal'), w = val('mlDraw'), r = val('mlReturn') / 100, inf = val('mlInfl') / 100, other = val('mlOther');
+      var b = bal, mth = 0, net = Math.max(0, w - other), data = [bal], yearsData = [];
+      while (b > 0 && mth < 1200) { var infl = Math.pow(1 + inf, Math.floor(mth / 12)); b = b * (1 + r / 12) - net * infl; mth++; if (mth % 12 === 0) data.push(Math.max(0, b)); }
+      var forever = mth >= 1200, yrs = Math.floor(mth / 12), mo = mth % 12;
+      var sustainable = bal * (r - inf > 0 ? (r - inf) : 0.0001) / 12 + other;
+      var for30 = (function () { var lo = 0, hi = bal; for (var k = 0; k < 60; k++) { var mid = (lo + hi) / 2, x = bal; for (var q = 0; q < 360; q++) x = x * (1 + r / 12) - mid * Math.pow(1 + inf, Math.floor(q / 12)); if (x > 0) lo = mid; else hi = mid; } return lo + other; })();
+      out('result', '<p class="eyebrow">Your money lasts</p><p class="result-big">' + (forever ? '100+ years' : yrs + ' yrs ' + mo + ' mo') + '</p><p class="result-sub">withdrawing ' + money(w) + '/month' + (inf ? ', rising with ' + (inf * 100).toFixed(1) + '% inflation' : '') + (other ? ' (' + money(other) + ' covered by pension/other income)' : '') + '</p>' +
+        '<div class="kpis">' + kpi('Withdrawal that lasts 30 years', money(for30) + '/mo') + kpi('Withdrawal that never touches principal (real)', money(sustainable) + '/mo') + kpi('Year-one withdrawal rate', bal ? (net * 12 / bal * 100).toFixed(1) + '%' : '—') + kpi('Runs out at age (if you start at 65)', forever ? 'Never' : 65 + yrs) + '</div><div id="mlChart"></div>' +
+        '<div class="tips"><strong>Make it last longer:</strong><ul><li>Delay government pension or Social Security if you can — later starts usually pay more for life.</li><li>Keep 1–2 years of spending in cash so you are not forced to sell after a market fall.</li><li>Trim withdrawals by 5–10% in bad market years.</li></ul></div>' + csv('money-last', [['Year', 'Balance']].concat(data.map(function (v, i) { return [i, Math.round(v)]; }))));
+      lineChart($('#mlChart'), [{ name: 'Balance', data: data, color: '#16b8a6', fill: true }], { label: 'Balance over time', xl: ['Today', forever ? '100 yrs' : yrs + ' yrs'] });
+    });
+  };
+
+  if (T[tool]) { T[tool](); if (H.points) H.points('tool-' + tool, 10); }
 })();
