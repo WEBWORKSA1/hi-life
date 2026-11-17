@@ -1,0 +1,28 @@
+title: Hi.Life
+tagline: Free tools & guides to upgrade your money, health, career and happiness
+description: "Hi.Life is a free life-upgrade toolkit: a 2-minute Life Score, 14 calculators for money, health and time, plain-English guides, and a free personalised Life Upgrade Plan."
+url: "https://hi.life"
+lang: en
+markdown: kramdown
+kramdown:
+  input: GFM
+  auto_ids: true
+exclude:
+  - README.md
+  - PROMPTS.md
+  - RESEARCH.md
+  - automation
+  - Gemfile
+  - Gemfile.lock
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: default
+  - scope:
+      path: "guides"
+    values:
+      layout: guide
+      section: Guides
+      section_url: guides/
+      article: true
