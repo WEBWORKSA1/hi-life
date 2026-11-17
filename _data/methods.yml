@@ -1,0 +1,155 @@
+life-score:
+  steps:
+    - "Twelve questions, two for each of six areas: money, health, career, home, relationships and mind."
+    - "Each answer scores 0 to 3. Each area's two answers are converted to a 0–100 score."
+    - "Your Life Score is the average of the six area scores. Your lowest area is flagged as your biggest lever."
+  assumptions: "A reflection tool inspired by the coaching 'wheel of life'. It is not a clinical, psychological or financial assessment."
+  sources:
+    - name: "CFPB Financial Well-Being Scale (short self-assessment model)"
+      url: "https://www.consumerfinance.gov/consumer-tools/"
+retirement:
+  steps:
+    - "Grows today's savings plus monthly contributions at your expected return each year until retirement."
+    - "Inflates your desired yearly spending and divides it by your withdrawal rate to find the nest egg you need."
+    - "Runs 1,000 simulated market paths (average return you choose, ±12% yearly volatility) from today to age 95 and reports how often the money lasts."
+  assumptions: "Returns and inflation are constant in the main projection; the stress test adds random yearly swings. Taxes, fees and government pensions are not modelled — subtract pension income from spending."
+  sources:
+    - name: "Fidelity — How much do I need to retire? (savings factors and assumptions)"
+      url: "https://www.fidelity.com/viewpoints/retirement/how-much-do-i-need-to-retire"
+    - name: "Mr. Money Mustache — The shockingly simple math behind early retirement"
+      url: "https://www.mrmoneymustache.com/2012/01/13/the-shockingly-simple-math-behind-early-retirement/"
+budget:
+  steps:
+    - "Splits monthly take-home pay into 50% needs, 30% wants and 20% savings and extra debt payments."
+    - "Compares your actual spending with each target and flags the biggest overage."
+  assumptions: "Uses after-tax income. The split is a guideline; high-cost areas may need more for needs."
+  sources:
+    - name: "Consumer Financial Protection Bureau — consumer tools and guides"
+      url: "https://www.consumerfinance.gov/consumer-tools/"
+net-worth:
+  steps:
+    - "Adds every asset you enter and subtracts every debt."
+    - "Optional benchmark: age × gross household income ÷ 10, from The Millionaire Next Door."
+    - "Snapshots are stored in your browser so you can track the trend month by month."
+  assumptions: "Use market values for assets; home value should be net of selling costs for a conservative view."
+  sources:
+    - name: "Fidelity — retirement savings milestones by age"
+      url: "https://www.fidelity.com/viewpoints/retirement/how-much-do-i-need-to-retire"
+debt-payoff:
+  steps:
+    - "Simulates month by month: interest is added, every minimum is paid, then any extra money goes to the target debt."
+    - "Avalanche targets the highest rate first; snowball the smallest balance. Freed-up minimums roll into the next target."
+    - "Compares both with paying minimums only."
+  assumptions: "Rates and minimum payments stay fixed; no new borrowing."
+  sources:
+    - name: "Consumer Financial Protection Bureau — credit cards and debt topics"
+      url: "https://www.consumerfinance.gov/consumer-tools/"
+compound-interest:
+  steps:
+    - "Future value with regular deposits: each period, balance × (1 + rate ÷ periods) + deposit."
+    - "Shows the same plan at your rate minus and plus 2 percentage points, so you see a realistic range rather than one number."
+    - "Doubling time = ln 2 ÷ ln(1 + rate ÷ periods) ÷ periods (the Rule of 72 is the shortcut)."
+  assumptions: "Deposits are spread evenly through the year; the rate is constant; results are before tax, fees and inflation."
+  sources:
+    - name: "Investor.gov (U.S. SEC) — Compound Interest Calculator, including rate variance range"
+      url: "https://www.investor.gov/financial-tools-calculators/calculators/compound-interest-calculator"
+    - name: "Omni Calculator — compound interest formula and worked examples"
+      url: "https://www.omnicalculator.com/finance/compound-interest"
+emergency-fund:
+  steps:
+    - "Starts at three months of essential costs."
+    - "Adds months for variable income (+1 or +3), dependants (+1 or +2) and being the only earner (+1), capped at 12."
+    - "Shows how long your monthly saving takes to close the gap."
+  assumptions: "Essential costs only — no restaurants, subscriptions or shopping."
+  sources:
+    - name: "Consumer Financial Protection Bureau — guides for financial decisions, including job loss"
+      url: "https://www.consumerfinance.gov/consumer-tools/"
+life-insurance:
+  steps:
+    - "DIME: Debts + Income × years needed + Mortgage + Education (+ final expenses)."
+    - "Subtracts existing cover and savings your family could use."
+    - "Suggests a term length rounded to 5 years that matches the income-replacement period."
+  assumptions: "Ignores investment growth on the payout and inflation; a licensed adviser can refine the figure."
+  sources:
+    - name: "Policygenius — life insurance coverage questions and term vs whole definitions"
+      url: "https://www.policygenius.com/life-insurance/"
+home-affordability:
+  steps:
+    - "Maximum monthly housing cost = the lower of 28% of gross monthly income and 36% minus other debt payments."
+    - "Searches for the highest price whose principal, interest, property tax, insurance and fees fit that limit."
+    - "Repeats at 25/33 for a comfortable price."
+  assumptions: "Fixed-rate loan; mortgage insurance and closing costs are not included in the payment."
+  sources:
+    - name: "Bankrate — mortgage and affordability tools"
+      url: "https://www.bankrate.com/"
+    - name: "NerdWallet — how much house can I afford tools"
+      url: "https://www.nerdwallet.com/"
+salary:
+  steps:
+    - "Yearly pay = rate × hours per week × paid weeks (or the equivalent for daily, weekly and monthly pay)."
+    - "Divides back into hourly, daily, weekly, bi-weekly (26 periods), monthly and yearly figures."
+    - "After-tax column applies one blended tax rate you choose."
+  assumptions: "A single blended tax rate is a simplification; real tax depends on country, brackets and deductions."
+  sources:
+    - name: "Indeed Career Guide — pay and salary negotiation"
+      url: "https://www.indeed.com/career-advice"
+life-in-weeks:
+  steps:
+    - "Weeks lived = days since birth ÷ 7. Total weeks = planning age × 52."
+    - "Each box is one week; rows are years. Logged weeks are coloured by whether you enjoyed them, built your future, both or neither."
+  assumptions: "Planning age is your choice; your birth date never leaves your browser."
+  sources:
+    - name: "Wait But Why — Your Life in Weeks (Tim Urban)"
+      url: "https://waitbutwhy.com/2014/05/life-weeks.html"
+calories:
+  steps:
+    - "BMR (Mifflin–St Jeor): 10 × kg + 6.25 × cm − 5 × age, +5 for men or −161 for women."
+    - "TDEE = BMR × activity factor (1.2 to 1.9)."
+    - "BMI = kg ÷ m²; healthy range shown as BMI 18.5–24.9 for your height."
+  assumptions: "Population formulas, typically within about 10% for most adults. Not for pregnancy, under-18s or medical conditions."
+  sources:
+    - name: "Healthline — calorie and macronutrient calculators hub"
+      url: "https://www.healthline.com/"
+    - name: "Mifflin MD, St Jeor ST et al. A new predictive equation for resting energy expenditure. Am J Clin Nutr, 1990."
+sleep:
+  steps:
+    - "Assumes about 15 minutes to fall asleep and 90-minute sleep cycles."
+    - "Counts back (or forward) 3 to 6 full cycles from your chosen time."
+  assumptions: "Real cycles range from about 70 to 120 minutes; use results as a planning estimate."
+  sources:
+    - name: "Sleep Foundation — sleep calculator and recommended sleep by age (medically reviewed)"
+      url: "https://www.sleepfoundation.org/sleep-calculator"
+habit-tracker:
+  steps:
+    - "Tick a day to mark a habit done. Streak = consecutive days completed up to today (or yesterday)."
+  assumptions: "Stored only in this browser."
+  sources:
+    - name: "James Clear — habit-building framework and Atomic Habits"
+      url: "https://jamesclear.com/"
+freedom-years:
+  steps:
+    - "Savings rate = (take-home pay − spending) ÷ take-home pay."
+    - "Your target = yearly spending ÷ withdrawal rate (25× spending at 4%)."
+    - "Grows your invested savings each year at your real (after-inflation) return until it reaches the target."
+  assumptions: "Constant real return; spending stays the same in today's money; starts from the amount you enter."
+  sources:
+    - name: "Mr. Money Mustache — The shockingly simple math behind early retirement"
+      url: "https://www.mrmoneymustache.com/2012/01/13/the-shockingly-simple-math-behind-early-retirement/"
+on-track:
+  steps:
+    - "Looks up the savings-by-age milestone (about 1× salary at 30, 3× at 40, 6× at 50, 8× at 60, 10× at 67) and interpolates between ages."
+    - "Adjusts for retirement age (65: more needed, 70: less) and lifestyle (below or above average)."
+    - "Calculates the monthly saving that reaches the age-67 target at a 5% return."
+  assumptions: "The guideline assumes saving about 15% a year from age 25, more than half in stocks, and replacing about 45% of pre-retirement income from savings."
+  sources:
+    - name: "Fidelity — How much do I need to retire? (savings factors by age)"
+      url: "https://www.fidelity.com/viewpoints/retirement/how-much-do-i-need-to-retire"
+money-last:
+  steps:
+    - "Each month: balance grows at your return ÷ 12, then your withdrawal (minus other income) is taken out."
+    - "Withdrawals rise once a year with inflation."
+    - "Also solves for the withdrawal that lasts exactly 30 years."
+  assumptions: "Constant return; no taxes or fees; other income (pension, Social Security) is fixed in today's money."
+  sources:
+    - name: "Calculator.net — retirement calculator 'How long can your money last?' mode"
+      url: "https://www.calculator.net/retirement-calculator.html"
