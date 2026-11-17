@@ -1,0 +1,48 @@
+---
+title: "Retirement & FIRE Calculator"
+description: "Free retirement and FIRE calculator: see your projected nest egg, the savings you need, your financial-independence age and the monthly amount that closes the gap."
+tool: true
+section: Tools
+section_url: tools.html
+crumb: "Retirement & FIRE calculator"
+faq:
+  - q: "What return should I assume?"
+    a: "A balanced, diversified portfolio has historically returned roughly 5–7% a year before inflation over long periods. Use a lower number to be conservative."
+  - q: "Does this include government pensions or Social Security?"
+    a: "No. Subtract any expected pension income from your yearly spending figure to see how much your own savings must cover."
+  - q: "Is the 4% rule still safe?"
+    a: "It is a starting point, not a guarantee. Many planners suggest 3.5–4% for a 30-year retirement and lower rates for retirements of 40+ years."
+---
+<section class="tool-hero wrap"><p class="eyebrow pill pill-money">Money tool · free · private</p><h1>Retirement &amp; FIRE calculator</h1><p class="lede">See what your savings could grow to, the nest egg you need, and the age you could reach financial independence. Adjust anything and the answer updates instantly.</p></section>
+<section class="wrap" data-tool="retirement">
+  <div class="tool-grid">
+    <div class="panel"><h2>Your numbers</h2><div class="field"><label for="cur">Currency</label><select id="cur" data-currency><option value="USD">US dollar ($)</option><option value="CAD">Canadian dollar (CA$)</option><option value="EUR">Euro (€)</option><option value="GBP">British pound (£)</option><option value="INR">Indian rupee (₹)</option><option value="AUD">Australian dollar (A$)</option><option value="AED">UAE dirham</option><option value="SGD">Singapore dollar</option><option value="LKR">Sri Lankan rupee</option></select></div><div class="two"><div class="field"><label for="rAge">Your age</label><input id="rAge" type="number" inputmode="decimal" step="1" value="35"></div><div class="field"><label for="rRetire">Retire at age</label><input id="rRetire" type="number" inputmode="decimal" step="1" value="65"></div></div><div class="two"><div class="field"><label for="rSaved">Saved so far</label><input id="rSaved" type="number" inputmode="decimal" step="100" value="40000"></div><div class="field"><label for="rMonthly">Monthly saving</label><input id="rMonthly" type="number" inputmode="decimal" step="10" value="600"></div></div><div class="field"><label for="rSpend">Yearly spending in retirement (today's money)</label><input id="rSpend" type="number" inputmode="decimal" step="500" value="50000"><small>Many people need 70–80% of their pre-retirement income.</small></div><div class="field"><label for="rReturn">Expected yearly return <span class="range-val" data-for="rReturn"></span></label><input id="rReturn" type="range" min="0" max="12" step="0.5" value="6" data-fmt="pct"></div><div class="field"><label for="rInfl">Inflation <span class="range-val" data-for="rInfl"></span></label><input id="rInfl" type="range" min="0" max="8" step="0.5" value="2.5" data-fmt="pct"></div><div class="field"><label for="rWithdraw">Safe withdrawal rate <span class="range-val" data-for="rWithdraw"></span></label><input id="rWithdraw" type="range" min="2.5" max="6" step="0.25" value="4" data-fmt="pct"></div><p class="fine">Everything is calculated in your browser. Nothing you type is sent to us unless you choose to email yourself the results.</p></div>
+    <div class="panel" aria-live="polite"><div id="result"></div>
+      <div class="ad-slot" data-slot="tool-result"></div>
+      <form class="news-inline" data-form="results" data-subject="Tool results request (Retirement & FIRE Calculator)" data-inline="Done! We will email your results and one tip to improve them.">
+        <p class="flabel" style="margin-top:14px">Email me these results + one tip to improve them</p>
+        <div class="two"><input type="email" name="email" required placeholder="you@example.com" aria-label="Email" autocomplete="email"><button class="btn btn-ink" type="submit">Send</button></div>
+        <input type="hidden" name="tool" value="Retirement & FIRE Calculator"><input type="hidden" name="summary" value="">
+        <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+      </form>
+    </div>
+  </div>
+</section>
+<section class="wrap" style="margin-top:20px"><aside class="lead-cta"><div><p class="eyebrow">Free · no obligation</p><h3>Want a professional to check your retirement plan?</h3><p>Get a personalised Life Upgrade Plan and, if you want, an intro to one vetted professional within 48 hours. No spam, no pressure.</p></div><a class="btn btn-sun" href="plan.html?focus=Money&src=tool-retirement">Get my free plan</a></aside></section>
+<section class="wrap article-grid" style="margin-top:10px">
+  <div class="prose"><h2>How this retirement calculator works</h2>
+<p>The calculator grows your current savings and monthly contributions at your expected return each year until your retirement age. In parallel it inflates your desired yearly spending and divides it by your withdrawal rate to find the nest egg you would need on the day you retire. The difference between the two is your shortfall or surplus.</p>
+<p><strong>Your FIRE number</strong> ("financial independence, retire early") is simply yearly spending divided by your withdrawal rate. At 4%, that is 25 times your spending. Once your invested savings reach it, work becomes optional.</p>
+<h2>The 4% rule, in plain English</h2>
+<p>The 4% rule comes from historical studies of US stock and bond returns: a retiree who withdrew 4% of their starting balance, then raised the amount with inflation, rarely ran out of money over 30 years. For longer retirements (early retirees) or if you want more safety, 3.25–3.5% is more conservative. Use the slider to see how much it changes your target.</p>
+<h2>Three levers that matter most</h2>
+<ol><li><strong>Savings rate.</strong> Raising what you save each month has a bigger effect than chasing higher returns.</li><li><strong>Time.</strong> Every extra year adds a contribution, a year of growth, and one fewer year of withdrawals.</li><li><strong>Costs.</strong> Low-cost index funds keep more of the return in your pocket. A 1% annual fee can consume roughly a quarter of the final balance over a long career.</li></ol>
+<p>Projections assume a steady return each year. Real markets rise and fall, so treat the result as a planning range, not a promise, and revisit it once a year.</p>
+    <div class="ad-slot" data-slot="in-content"></div>
+    <p>Go deeper: <a href="guides/retire-early-fire.html">read the full guide</a>.</p>
+    <h2 id="faq">Frequently asked questions</h2><div class="faq"><details><summary>What return should I assume?</summary><p>A balanced, diversified portfolio has historically returned roughly 5–7% a year before inflation over long periods. Use a lower number to be conservative.</p></details><details><summary>Does this include government pensions or Social Security?</summary><p>No. Subtract any expected pension income from your yearly spending figure to see how much your own savings must cover.</p></details><details><summary>Is the 4% rule still safe?</summary><p>It is a starting point, not a guarantee. Many planners suggest 3.5–4% for a 30-year retirement and lower rates for retirements of 40+ years.</p></details></div>
+    <p class="fine">For education only. Results are estimates based on the numbers you enter and simplified assumptions; they are not financial, medical or legal advice.</p>
+  </div>
+  <aside class="side"><div class="side-card"><p class="eyebrow">How balanced is your life?</p><p>Take the 2-minute Life Score quiz.</p><a class="btn btn-sun btn-sm" href="life-score.html">Get my score</a></div><div class="ad-slot" data-slot="sidebar"></div></aside>
+</section>
+<section class="wrap section" style="padding-top:20px"><h2>Related tools</h2><div class="grid g3"><a class="card" href="compound-interest.html"><h3>Compound Interest Calculator</h3><p>Open the free tool →</p></a><a class="card" href="net-worth.html"><h3>Net Worth Calculator &amp; Tracker</h3><p>Open the free tool →</p></a><a class="card" href="emergency-fund.html"><h3>Emergency Fund Calculator</h3><p>Open the free tool →</p></a></div></section>
