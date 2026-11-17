@@ -19,7 +19,7 @@ Use these prompts in order (with Claude or any capable AI builder) to rebuild, e
 
 ## Phase 1 — Strategy & research
 
-> Research at least 35 leading sites across personal finance tools (NerdWallet, Bankrate, SmartAsset, Calculator.net, Omni), retirement (Boldin, Empower, Fidelity, Vanguard), insurance (Policygenius, Northwestern Mutual), health (Healthline, Mayo Clinic, Sleep Foundation, MyFitnessPal), mind/habits (Headspace, Calm, James Clear, Wait But Why), career (The Muse, Glassdoor) and video (TED). For each, list the feature, form, content pattern or design element worth adopting. Then write `RESEARCH.md` with: the chosen concept and why it beats 3 alternatives (table with search demand, RPM, lead value, repeat visits), the full revenue model, the benchmark table, an AdSense approval checklist and a risk table.
+> Open and read (do not rely on search snippets) at least 35 leading sites across personal finance tools (NerdWallet, Bankrate, SmartAsset, Calculator.net, Omni), retirement (Boldin, Empower, Fidelity, Vanguard), insurance (Policygenius, Northwestern Mutual), health (Healthline, Mayo Clinic, Sleep Foundation, MyFitnessPal), mind/habits (Headspace, Calm, James Clear, Wait But Why), career (The Muse, Glassdoor) and video (TED). For each, list the feature, form, content pattern or design element worth adopting. Log the exact page opened for each, note any site that refuses access and replace it. Then write `RESEARCH.md` with a visit log table (site, page opened, what you observed, what you built from it), and: the chosen concept and why it beats 3 alternatives (table with search demand, RPM, lead value, repeat visits), the full revenue model, the benchmark table, an AdSense approval checklist and a risk table.
 
 ## Phase 2 — Design system & shell
 
@@ -52,6 +52,10 @@ Use these prompts in order (with Claude or any capable AI builder) to rebuild, e
 ## Phase 9 — QA & launch
 
 > Check every internal link resolves, every JS file parses, no page contains the inbox address in plain text, all forms have labels and honeypots, Lighthouse ≥ 90 on mobile, and the site renders at 360px. Push to `main`, enable Pages (Deploy from branch → main → root), add the custom domain `hi.life` with the four GitHub A records and a `www` CNAME, enforce HTTPS, activate FormSubmit with the first submission, add the site in AdSense, turn on Auto ads and the EEA/UK consent message, submit `sitemap.xml` to Google Search Console.
+
+## Phase 9b — Research-driven upgrades (from the visit log)
+
+> Add: Years to Freedom (savings rate), Am I On Track (savings-by-age milestones), How Long Will My Money Last; a 1,000-scenario stress test in the retirement tool; ±2% return range in compound interest; CSV export on money tools; a "How this tool works" block (steps, assumptions, sources, reviewed stamp, feedback, share) on every tool from `_data/methods.yml`; a Life Events hub; a 7-day email course lead magnet; How We Make Money and Methodology pages; a Share Your Story page; embeddable tools with `?embed=1` and a branded-embed lead form; Upgrade Points; intent chips, tabbed toolbox, life-event cards and trust pillars on the home page; weekly enjoy/build log and printable life calendar.
 
 ## Phase 10 — Growth (after approval)
 

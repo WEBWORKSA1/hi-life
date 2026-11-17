@@ -1,10 +1,10 @@
 # Hi.Life
 
-The free life-upgrade toolkit: a 2-minute **Life Score**, 13 more private calculators (retirement & FIRE, budget, net worth, debt payoff, compound interest, emergency fund, life insurance, home affordability, salary, calories & BMI, sleep, habits, life in weeks), 14 plain-English guides, curated videos, daily news, and a free **Life Upgrade Plan** that turns high-intent visitors into scored leads.
+The free life-upgrade toolkit: a 2-minute **Life Score**, 16 more private calculators (retirement & FIRE with a 1,000-scenario stress test, years to freedom, am I on track, how long will my money last, budget, net worth, debt payoff, compound interest, emergency fund, life insurance, home affordability, salary, calories & BMI, sleep, habits, life in weeks), 14 plain-English guides, curated videos, daily news, and a free **Life Upgrade Plan** that turns high-intent visitors into scored leads.
 
 Static Jekyll site. Hosted free on GitHub Pages from `main` (root).
 
-- `RESEARCH.md`: concept, revenue model, 38-site benchmark, AdSense checklist, risks
+- `RESEARCH.md`: concept, revenue model, a 40-site visit log (what each site does and what Hi.Life adopted), AdSense checklist, risks
 - `PROMPTS.md`: phase-by-phase prompts to rebuild or extend the site
 
 ## How it is built
@@ -16,7 +16,8 @@ Static Jekyll site. Hosted free on GitHub Pages from `main` (root).
 | `_layouts/` | `default.html` (owner bar, header, AdSense, schema, footer) and `guide.html` |
 | `assets/js/config.js` | Encoded form inbox, AdSense slot IDs, payment links, contest settings |
 | `assets/js/site.js` | Forms + lead scoring, attribution, self-updating widgets, search, video loader |
-| `assets/js/tools.js` | All 14 interactive tools |
+| `assets/js/tools.js` | All 17 interactive tools, CSV export, stress test |
+| `_data/methods.yml` | Formula, assumptions and sources shown under every tool and on `methodology.html` |
 | `assets/data/*.json` | Tips, quotes, observances, news |
 | `automation/` | Daily news refresh (GitHub Actions) |
 | `sitemap.xml`, `search.json` | Generated automatically by Jekyll from all pages |
@@ -25,6 +26,7 @@ Every page writes a relative `<base href>`, so the same files work at `https://w
 
 ## Self-updating parts
 
+- **Embeds:** any tool works inside other sites with `?embed=1`; codes on `embed.html`.
 - **Every visit (browser):** upgrade-of-the-day tip, quote of the day, next life observance ribbon (rolls into next year by itself), dates, copyright year, contest countdown.
 - **Daily (GitHub Actions, after step 5):** fresh Money, Health and Career headlines on `news.html` and the home page. Until then, trusted-source links show instead.
 - **On every push:** Jekyll rebuilds pages, sitemap, search index and cache-busting asset versions.
