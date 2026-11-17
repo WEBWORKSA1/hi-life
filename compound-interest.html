@@ -1,0 +1,47 @@
+---
+title: "Compound Interest Calculator"
+description: "Free compound interest calculator with monthly contributions, a growth chart and a year-by-year table. See how fast your money doubles."
+tool: true
+section: Tools
+section_url: tools.html
+crumb: "Compound interest calculator"
+faq:
+  - q: "What is a realistic return?"
+    a: "High-yield savings accounts pay a fixed rate set by the bank. Diversified stock index funds have historically averaged higher long-run returns but with ups and downs year to year."
+  - q: "Does compounding frequency matter much?"
+    a: "A little. Monthly vs yearly compounding makes a small difference; the rate and the number of years matter far more."
+  - q: "Is the result before or after inflation?"
+    a: "Before. Subtract expected inflation from your rate to see the result in today's money."
+---
+<section class="tool-hero wrap"><p class="eyebrow pill pill-money">Money tool · free · private</p><h1>Compound interest calculator</h1><p class="lede">See exactly how your money grows with regular deposits and compound interest. Change the rate or years and watch the curve bend.</p></section>
+<section class="wrap" data-tool="compound-interest">
+  <div class="tool-grid">
+    <div class="panel"><h2>Your numbers</h2><div class="field"><label for="cur">Currency</label><select id="cur" data-currency><option value="USD">US dollar ($)</option><option value="CAD">Canadian dollar (CA$)</option><option value="EUR">Euro (€)</option><option value="GBP">British pound (£)</option><option value="INR">Indian rupee (₹)</option><option value="AUD">Australian dollar (A$)</option><option value="AED">UAE dirham</option><option value="SGD">Singapore dollar</option><option value="LKR">Sri Lankan rupee</option></select></div><div class="two"><div class="field"><label for="ciP">Starting amount</label><input id="ciP" type="number" inputmode="decimal" step="100" value="10000"></div><div class="field"><label for="ciM">Monthly deposit</label><input id="ciM" type="number" inputmode="decimal" step="10" value="300"></div></div><div class="field"><label for="ciR">Yearly interest / return <span class="range-val" data-for="ciR"></span></label><input id="ciR" type="range" min="0" max="15" step="0.25" value="7" data-fmt="pct"></div><div class="field"><label for="ciY">Years <span class="range-val" data-for="ciY"></span></label><input id="ciY" type="range" min="1" max="50" step="1" value="25"></div><div class="field"><label for="ciN">Compounding</label><select id="ciN"><option value="12" selected>Monthly</option><option value="4">Quarterly</option><option value="1">Yearly</option><option value="365">Daily</option></select></div><p class="fine">Everything is calculated in your browser. Nothing you type is sent to us unless you choose to email yourself the results.</p></div>
+    <div class="panel" aria-live="polite"><div id="result"></div>
+      <div class="ad-slot" data-slot="tool-result"></div>
+      <form class="news-inline" data-form="results" data-subject="Tool results request (Compound Interest Calculator)" data-inline="Done! We will email your results and one tip to improve them.">
+        <p class="flabel" style="margin-top:14px">Email me these results + one tip to improve them</p>
+        <div class="two"><input type="email" name="email" required placeholder="you@example.com" aria-label="Email" autocomplete="email"><button class="btn btn-ink" type="submit">Send</button></div>
+        <input type="hidden" name="tool" value="Compound Interest Calculator"><input type="hidden" name="summary" value="">
+        <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+      </form>
+    </div>
+  </div>
+</section>
+<section class="wrap" style="margin-top:20px"><aside class="lead-cta"><div><p class="eyebrow">Free · no obligation</p><h3>Ready to put your money to work?</h3><p>Get a personalised Life Upgrade Plan and, if you want, an intro to one vetted professional within 48 hours. No spam, no pressure.</p></div><a class="btn btn-sun" href="plan.html?focus=Money&src=tool-compound-interest">Get my free plan</a></aside></section>
+<section class="wrap article-grid" style="margin-top:10px">
+  <div class="prose"><h2>Compound interest explained</h2>
+<p>Compound interest means you earn returns on your original money <em>and</em> on the returns it has already earned. Early on, growth looks slow. Over decades, the interest you earn each year can exceed what you deposit — the bend in the chart above.</p>
+<h2>The Rule of 72</h2>
+<p>Divide 72 by your yearly return to estimate how many years it takes money to double. At 6% it doubles about every 12 years; at 9%, every 8 years. The calculator shows the exact figure for your inputs.</p>
+<h2>What to do with this</h2>
+<ul><li><strong>Start now.</strong> Time in the market does more work than the amount you start with.</li><li><strong>Automate deposits.</strong> Monthly contributions smooth out market ups and downs (dollar-cost averaging).</li><li><strong>Watch fees and taxes.</strong> Use tax-advantaged accounts where available and low-cost funds.</li></ul>
+<p>Savings accounts pay a fixed rate; investments like index funds have higher expected returns but can fall in value. The calculator assumes a steady rate for clarity.</p>
+    <div class="ad-slot" data-slot="in-content"></div>
+    <p>Go deeper: <a href="guides/start-investing.html">read the full guide</a>.</p>
+    <h2 id="faq">Frequently asked questions</h2><div class="faq"><details><summary>What is a realistic return?</summary><p>High-yield savings accounts pay a fixed rate set by the bank. Diversified stock index funds have historically averaged higher long-run returns but with ups and downs year to year.</p></details><details><summary>Does compounding frequency matter much?</summary><p>A little. Monthly vs yearly compounding makes a small difference; the rate and the number of years matter far more.</p></details><details><summary>Is the result before or after inflation?</summary><p>Before. Subtract expected inflation from your rate to see the result in today&#x27;s money.</p></details></div>
+    <p class="fine">For education only. Results are estimates based on the numbers you enter and simplified assumptions; they are not financial, medical or legal advice.</p>
+  </div>
+  <aside class="side"><div class="side-card"><p class="eyebrow">How balanced is your life?</p><p>Take the 2-minute Life Score quiz.</p><a class="btn btn-sun btn-sm" href="life-score.html">Get my score</a></div><div class="ad-slot" data-slot="sidebar"></div></aside>
+</section>
+<section class="wrap section" style="padding-top:20px"><h2>Related tools</h2><div class="grid g3"><a class="card" href="retirement.html"><h3>Retirement &amp; FIRE Calculator</h3><p>Open the free tool →</p></a><a class="card" href="emergency-fund.html"><h3>Emergency Fund Calculator</h3><p>Open the free tool →</p></a><a class="card" href="net-worth.html"><h3>Net Worth Calculator &amp; Tracker</h3><p>Open the free tool →</p></a></div></section>
