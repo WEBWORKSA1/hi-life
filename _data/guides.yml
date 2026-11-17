@@ -1,0 +1,70 @@
+- slug: emergency-fund
+  title: "How to Build an Emergency Fund (Even on a Tight Budget)"
+  url: guides/emergency-fund.html
+  pillar: Money
+  desc: "A step-by-step plan to build a starter safety net in weeks and a full emergency fund in months, plus where to keep it and what counts as an emergency."
+- slug: budget-that-works
+  title: "How to Make a Budget That Actually Works"
+  url: guides/budget-that-works.html
+  pillar: Money
+  desc: "A simple, realistic budgeting system you can set up in one evening: the 50/30/20 split, sinking funds, automation and a 10-minute monthly check-in."
+- slug: retire-early-fire
+  title: "FIRE Explained: How Financial Independence and Early Retirement Work"
+  url: guides/retire-early-fire.html
+  pillar: Money
+  desc: "What FIRE really means, how to calculate your FIRE number, the role of savings rate, and the lean, fat, barista and coast variations."
+- slug: net-worth-milestones
+  title: "Net Worth by Age: Milestones and How to Grow Yours"
+  url: guides/net-worth-milestones.html
+  pillar: Money
+  desc: "How to calculate net worth, realistic milestones by decade, and the habits that grow it fastest — without comparing yourself into misery."
+- slug: get-out-of-debt
+  title: "How to Get Out of Debt: A Practical, Proven Plan"
+  url: guides/get-out-of-debt.html
+  pillar: Money
+  desc: "Stop the bleeding, choose avalanche or snowball, lower your interest rates and stay motivated until your debt-free date."
+- slug: start-investing
+  title: "How to Start Investing: A Beginner's Guide"
+  url: guides/start-investing.html
+  pillar: Money
+  desc: "Where to start investing, what index funds are, how much risk to take, and the simple habits that beat most investors."
+- slug: life-insurance-basics
+  title: "Life Insurance Explained: Do You Need It, and How Much?"
+  url: guides/life-insurance-basics.html
+  pillar: Money
+  desc: "Who needs life insurance, term vs whole life, how to calculate cover with the DIME method, and how to buy without overpaying."
+- slug: buy-vs-rent
+  title: "Buy vs Rent: How to Decide With Numbers, Not Feelings"
+  url: guides/buy-vs-rent.html
+  pillar: Home
+  desc: "The real costs of owning and renting, the 5% rule, how long you need to stay to break even, and a checklist before you buy."
+- slug: raise-your-income
+  title: "How to Raise Your Income: Raises, Job Moves and Side Income"
+  url: guides/raise-your-income.html
+  pillar: Career
+  desc: "A practical playbook to earn more: negotiate a raise, change jobs strategically, build high-value skills and start a side income stream."
+- slug: set-goals-that-stick
+  title: "How to Set Goals That Actually Stick"
+  url: guides/set-goals-that-stick.html
+  pillar: Mind
+  desc: "A simple goal system: pick one theme for the year, turn it into weekly actions, track leading indicators and review every Sunday."
+- slug: healthy-habits
+  title: "Ten Small Healthy Habits With an Outsized Payoff"
+  url: guides/healthy-habits.html
+  pillar: Health
+  desc: "Evidence-informed daily habits for energy, weight, mood and longevity — each small enough to start today."
+- slug: sleep-better
+  title: "How to Sleep Better Tonight: A Science-Backed Guide"
+  url: guides/sleep-better.html
+  pillar: Health
+  desc: "Why sleep matters, how much you need, the habits that help most, and when to talk to a doctor."
+- slug: stress-reset
+  title: "The 10-Minute Stress Reset: Calm Your Mind and Regain Control"
+  url: guides/stress-reset.html
+  pillar: Mind
+  desc: "Quick, practical techniques to lower stress in the moment and habits that build resilience over time."
+- slug: strong-relationships
+  title: "How to Build Stronger Relationships (The Biggest Predictor of a Good Life)"
+  url: guides/strong-relationships.html
+  pillar: Love
+  desc: "Why relationships matter more than money or fame for long-term happiness, and simple weekly rituals to deepen friendships, love and family bonds."
