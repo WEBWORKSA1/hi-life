@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{%- assign _a = page.url | size -%}{%- assign _b = page.url | remove: "/" | size -%}{%- assign _dirs = _a | minus: _b | minus: 1 -%}
+{%- capture base -%}{%- for i in (1.._dirs) -%}../{%- endfor -%}{%- endcapture -%}
+{%- if base == "" -%}{%- assign base = "./" -%}{%- endif %}
+{% if page.base == "dynamic" %}<script>document.write('<base href="'+(location.hostname.slice(-9)==='github.io'?'/hi-life/':'/')+'">')</script>{% else %}<base href="{{ base }}">{% endif %}
+{%- assign ptitle = page.title | default: site.title -%}
+{%- if page.url == "/" -%}{%- assign full_title = site.title | append: " | " | append: site.tagline -%}{%- else -%}{%- assign full_title = ptitle | append: " | " | append: site.title -%}{%- endif -%}
+{%- assign pdesc = page.description | default: site.description -%}
+{%- assign purl = site.url | append: page.url -%}
+{%- assign ver = site.time | date: "%Y%m%d%H%M" %}
+<title>{{ full_title | escape }}</title>
+<meta name="description" content="{{ pdesc | escape }}">
+<link rel="canonical" href="{{ purl }}">
+{% if page.noindex %}<meta name="robots" content="noindex,follow">
+{% endif %}<meta name="google-adsense-account" content="ca-pub-6620975821265271">
+<meta name="theme-color" content="#0f1b2d">
+<meta property="og:type" content="{% if page.article %}article{% else %}website{% endif %}">
+<meta property="og:site_name" content="Hi.Life">
+<meta property="og:title" content="{{ ptitle | escape }}">
+<meta property="og:description" content="{{ pdesc | escape }}">
+<meta property="og:url" content="{{ purl }}">
+<meta property="og:image" content="{{ site.url }}/assets/img/og.svg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="site.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="assets/css/site.css?v={{ ver }}">
+{% unless page.ads == false %}<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6620975821265271" crossorigin="anonymous"></script>
+{% endunless %}<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"{{ site.url }}/#org","name":"Hi.Life","url":"{{ site.url }}/","logo":"{{ site.url }}/assets/img/logo.svg"},{"@type":"WebSite","@id":"{{ site.url }}/#site","name":"Hi.Life","url":"{{ site.url }}/","publisher":{"@id":"{{ site.url }}/#org"},"potentialAction":{"@type":"SearchAction","target":"{{ site.url }}/search.html?q={query}","query-input":"required name=query"}}{% if page.section %},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"{{ site.url }}/"},{"@type":"ListItem","position":2,"name":{{ page.section | jsonify }},"item":"{{ site.url }}/{{ page.section_url }}"},{"@type":"ListItem","position":3,"name":{{ ptitle | jsonify }},"item":"{{ purl }}"}]}{% endif %}{% if page.article %},{"@type":"Article","headline":{{ ptitle | jsonify }},"description":{{ pdesc | jsonify }},"url":"{{ purl }}","dateModified":"{{ page.updated | default: site.time | date: '%Y-%m-%d' }}","author":{"@type":"Organization","name":"Hi.Life Editorial Team"},"publisher":{"@id":"{{ site.url }}/#org"}}{% endif %}{% if page.tool %},{"@type":"WebApplication","name":{{ ptitle | jsonify }},"url":"{{ purl }}","applicationCategory":"LifestyleApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}{% endif %}{% if page.faq %},{"@type":"FAQPage","mainEntity":[{% for f in page.faq %}{"@type":"Question","name":{{ f.q | jsonify }},"acceptedAnswer":{"@type":"Answer","text":{{ f.a | jsonify }}}}{% unless forloop.last %},{% endunless %}{% endfor %}]}{% endif %}]}</script>
+</head>
+<body class="{{ page.body_class }}">
+<a class="skip" href="#main">Skip to content</a>
+<a class="owner-bar" href="https://web.works/contact" target="_blank" rel="noopener">Contact, if you are interested in this website / domain name / Sponsorship / Advertisement / Partnership</a>
+<header class="site-head">
+  <div class="wrap head-row">
+    <a class="logo" href="./" aria-label="Hi.Life home"><img src="assets/img/logo.svg" alt="" width="38" height="38"><span>Hi<i>.</i>Life</span></a>
+    <nav id="nav" aria-label="Main"><ul>
+      <li><a href="life-score.html">Life Score</a></li>
+      <li class="has-sub"><button type="button" class="sub-toggle" aria-expanded="false">Tools<span aria-hidden="true">▾</span></button>
+        <div class="sub mega">
+          <div><p class="mega-h">Money</p><a href="retirement.html">Retirement &amp; FIRE</a><a href="budget.html">50/30/20 Budget</a><a href="net-worth.html">Net Worth</a><a href="debt-payoff.html">Debt Payoff Planner</a><a href="compound-interest.html">Compound Interest</a><a href="emergency-fund.html">Emergency Fund</a></div>
+          <div><p class="mega-h">Protect &amp; Home</p><a href="life-insurance.html">Life Insurance Needs</a><a href="home-affordability.html">Home Affordability</a><a href="salary.html">Salary Converter</a></div>
+          <div><p class="mega-h">Health &amp; Time</p><a href="life-in-weeks.html">Your Life in Weeks</a><a href="calories.html">Calories &amp; BMI</a><a href="sleep.html">Sleep Cycle</a><a href="habit-tracker.html">Habit Tracker</a><a class="mega-all" href="tools.html">All 14 tools →</a></div>
+        </div></li>
+      <li><a href="guides/">Guides</a></li>
+      <li><a href="videos.html">Videos</a></li>
+      <li><a href="news.html">News</a></li>
+      <li><a href="contests.html">Contests</a></li>
+    </ul></nav>
+    <div class="head-actions">
+      <a class="icon-btn" href="search.html" aria-label="Search"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="M20 20l-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></a>
+      <a class="btn btn-sun btn-sm head-cta" href="plan.html">Free Life Plan</a>
+      <button id="burger" class="burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="nav"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+<div class="ribbon" id="ribbon" hidden></div>
+<main id="main" tabindex="-1">
+{% if page.section %}<nav class="crumbs wrap" aria-label="Breadcrumb"><a href="./">Home</a><span aria-hidden="true">›</span><a href="{{ page.section_url }}">{{ page.section }}</a><span aria-hidden="true">›</span><span aria-current="page">{{ page.crumb | default: ptitle }}</span></nav>{% endif %}
+{{ content }}
+</main>
+<footer class="site-foot">
+  <div class="wrap foot-grid">
+    <div class="foot-brand">
+      <a class="logo logo-light" href="./"><img src="assets/img/logo.svg" alt="" width="34" height="34"><span>Hi<i>.</i>Life</span></a>
+      <p>Free, independent tools and plain-English guides to upgrade the six areas that make a good life: money, health, career, home, relationships and mind.</p>
+      <form class="news-form" data-form="newsletter" data-subject="Newsletter signup" data-inline="You are in. Your first Sunday Upgrade arrives this weekend.">
+        <label for="nlEmail">The Sunday Upgrade — one email, five ideas, every week</label>
+        <div class="row"><input id="nlEmail" type="email" name="email" required placeholder="you@example.com" autocomplete="email"><button class="btn btn-sun btn-sm" type="submit">Join free</button></div>
+        <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+      </form>
+    </div>
+    <div><p class="foot-h">Tools</p><a href="life-score.html">Life Score</a><a href="retirement.html">Retirement &amp; FIRE</a><a href="budget.html">Budget</a><a href="life-insurance.html">Life Insurance Needs</a><a href="life-in-weeks.html">Life in Weeks</a><a href="tools.html">All tools</a></div>
+    <div><p class="foot-h">Hi.Life</p><a href="plan.html">Free Life Upgrade Plan</a><a href="for-pros.html">For Professionals</a><a href="support.html">Support Us</a><a href="contests.html">Contests &amp; Prizes</a><a href="careers.html">Careers</a><a href="advertise.html">Advertise &amp; Sponsor</a></div>
+    <div><p class="foot-h">Trust</p><a href="about.html">About</a><a href="editorial-policy.html">Editorial Policy</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="disclaimer.html">Disclaimer</a><a href="legal.html">Trademark &amp; Copyright</a></div>
+  </div>
+  <div class="wrap foot-base"><p>© <span data-year>{{ site.time | date: "%Y" }}</span> Hi.Life. Educational information only, not financial, medical or legal advice. Hi.Life is independent and not affiliated with any company named "Hi-Life" or "HiLife". <a href="legal.html">Full disclosure</a> · <a href="sitemap.xml">Sitemap</a></p></div>
+</footer>
+<div class="sticky-lead" id="stickyLead" hidden><p><strong>Get your free Life Upgrade Plan</strong> — matched to a vetted pro in 48 hours.</p><a class="btn btn-sun btn-sm" href="plan.html?src=sticky">Start free</a><button type="button" aria-label="Dismiss" data-dismiss-sticky>×</button></div>
+<script src="assets/js/config.js?v={{ ver }}" defer></script>
+<script src="assets/js/site.js?v={{ ver }}" defer></script>
+{% if page.tool %}<script src="assets/js/tools.js?v={{ ver }}" defer></script>
+{% endif %}</body>
+</html>

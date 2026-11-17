@@ -1,0 +1,29 @@
+---
+layout: default
+---
+<article class="wrap article-wrap">
+  <header class="article-head">
+    <p class="eyebrow pill pill-{{ page.pillar | downcase }}">{{ page.pillar }}</p>
+    <h1>{{ page.title }}</h1>
+    <p class="lede">{{ page.description }}</p>
+    <p class="meta">By the Hi.Life Editorial Team · Updated {{ page.updated | default: site.time | date: "%B %-d, %Y" }} · {{ content | number_of_words | divided_by: 220 | plus: 1 }} min read</p>
+    <div class="share-row"><button class="chip" type="button" data-share-native>Share</button><button class="chip" type="button" data-copy-link>Copy link</button><button class="chip" type="button" data-print>Print</button></div>
+  </header>
+  <div class="article-grid">
+    <div class="prose" id="prose">
+      <nav class="toc" id="toc" aria-label="On this page" hidden></nav>
+      {{ content }}
+      {% if page.faq %}<h2 id="faq">Quick answers</h2><div class="faq">{% for f in page.faq %}<details><summary>{{ f.q }}</summary><p>{{ f.a }}</p></details>{% endfor %}</div>{% endif %}
+      <div class="ad-slot" data-slot="in-content"></div>
+      {% if page.tool_link %}<aside class="tool-callout"><p class="eyebrow">Try the free tool</p><h3>{{ page.tool_name }}</h3><p>Run your own numbers in under a minute. Nothing is stored on our servers.</p><a class="btn btn-ink" href="{{ page.tool_link }}">Open {{ page.tool_name }}</a></aside>{% endif %}
+      <aside class="lead-cta"><div><p class="eyebrow">Free · no obligation</p><h3>Want a plan built around your numbers?</h3><p>Answer a few quick questions and get a personalised Life Upgrade Plan, plus an optional intro to one vetted professional (financial planner, insurance, mortgage or coach) within 48 hours.</p></div><a class="btn btn-sun" href="plan.html?src=guide-{{ page.slug }}">Get my free plan</a></aside>
+      <div class="helpful" data-helpful="{{ page.url }}"><p>Was this guide helpful?</p><button class="chip" type="button" data-vote="yes">Yes</button><button class="chip" type="button" data-vote="no">Not really</button></div>
+      <p class="fine">This guide is general education, not personal financial, medical or legal advice. Check figures against current official sources and talk to a licensed professional before making big decisions. See our <a href="editorial-policy.html">editorial policy</a>.</p>
+    </div>
+    <aside class="side">
+      <div class="side-card"><p class="eyebrow">Your Life Score</p><p>How balanced is your life right now? 12 questions, 2 minutes.</p><a class="btn btn-sun btn-sm" href="life-score.html">Take the quiz</a></div>
+      <div class="ad-slot" data-slot="sidebar"></div>
+      <div class="side-card"><p class="eyebrow">Keep reading</p><ul class="side-list">{% assign rel = site.data.guides | where_exp: "g", "g.slug != page.slug" | where: "pillar", page.pillar %}{% for g in rel limit: 3 %}<li><a href="{{ g.url }}">{{ g.title }}</a></li>{% endfor %}{% assign other = site.data.guides | where_exp: "g", "g.pillar != page.pillar" %}{% for g in other limit: 3 %}<li><a href="{{ g.url }}">{{ g.title }}</a></li>{% endfor %}</ul></div>
+    </aside>
+  </div>
+</article>
