@@ -1,0 +1,16 @@
+[
+{"m": 1, "d": 1, "name": "New Year's Day", "cta": "Set goals that stick", "link": "guides/set-goals-that-stick.html"},
+{"m": 2, "d": 14, "name": "Valentine's Day", "cta": "Build stronger relationships", "link": "guides/strong-relationships.html"},
+{"m": 3, "d": 20, "name": "International Day of Happiness", "cta": "Take the Life Score", "link": "life-score.html"},
+{"m": 4, "d": 7, "name": "World Health Day", "cta": "Start 10 healthy habits", "link": "guides/healthy-habits.html"},
+{"m": 5, "d": 1, "name": "International Workers' Day", "cta": "Raise your income", "link": "guides/raise-your-income.html"},
+{"m": 6, "d": 1, "name": "Global Day of Parents", "cta": "Check your family's life cover", "link": "life-insurance.html"},
+{"m": 7, "d": 30, "name": "International Day of Friendship", "cta": "Reconnect with a friend", "link": "guides/strong-relationships.html"},
+{"m": 9, "d": 29, "name": "World Heart Day", "cta": "Move more, starting today", "link": "calories.html"},
+{"m": 10, "d": 1, "name": "International Day of Older Persons", "cta": "Plan your retirement", "link": "retirement.html"},
+{"m": 10, "d": 10, "name": "World Mental Health Day", "cta": "Try the 10-minute stress reset", "link": "guides/stress-reset.html"},
+{"m": 10, "d": 31, "name": "World Savings Day", "cta": "Build your emergency fund", "link": "emergency-fund.html"},
+{"m": 11, "d": 14, "name": "World Diabetes Day", "cta": "Know your health numbers", "link": "calories.html"},
+{"m": 12, "d": 1, "name": "Year-end money check-in month", "cta": "Track your net worth", "link": "net-worth.html"},
+{"m": 12, "d": 31, "name": "New Year's Eve", "cta": "See your life in weeks", "link": "life-in-weeks.html"}
+]

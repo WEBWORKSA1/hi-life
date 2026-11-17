@@ -1,0 +1,7 @@
+---
+layout: null
+permalink: /search.json
+---
+[{%- assign first = true -%}{%- for p in site.html_pages -%}{%- unless p.noindex or p.url contains '404' -%}{%- unless first -%},{%- endunless -%}{%- assign first = false -%}
+{"t":{{ p.title | default: site.title | jsonify }},"d":{{ p.description | default: '' | jsonify }},"u":{{ p.url | remove_first: '/' | replace: 'index.html', '' | jsonify }},"k":{{ p.pillar | default: '' | append: ' ' | append: p.crumb | jsonify }}}
+{%- endunless -%}{%- endfor -%}]
